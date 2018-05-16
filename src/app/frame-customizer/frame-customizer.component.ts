@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import 'fabric';
 declare const fabric: any;
 
+// Load Fabric Brush <https://github.com/tennisonchan/fabric-brush>
+import '../../assets/js/fabric-brush.min.js';
 
 @Component({
     selector: 'app-frame-customizer',
@@ -44,6 +46,7 @@ export class FrameCustomizerComponent{
 		fabric.Object.prototype.transparentCorners = false;
 
 		// Set up spray brush
+/*
 		var sprayBrush = new fabric.SprayBrush(fabricCanvas);
 		sprayBrush.density = 20;
 		sprayBrush.dotWidth = 1;
@@ -51,6 +54,12 @@ export class FrameCustomizerComponent{
 		sprayBrush.optimizeOverlapping = true;
 		sprayBrush.randomOpacity = false;
 		sprayBrush.width = 30;
+		fabricCanvas.freeDrawingBrush = sprayBrush;
+*/
+		var sprayBrush = new fabric.InkBrush(fabricCanvas, {
+			width: 5,
+			inkAmount: 10
+		});
 		fabricCanvas.freeDrawingBrush = sprayBrush;
 
 		// Load image as Canvas background
