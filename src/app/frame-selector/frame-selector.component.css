@@ -1,0 +1,10 @@
+.frames-list {
+    display: flex;
+}
+.frames-list a {
+    display: block;
+    flex: 0 1 auto;
+}
+.frames-list img{
+    display: block;
+}

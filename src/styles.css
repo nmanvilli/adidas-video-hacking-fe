@@ -10,3 +10,7 @@ body {
 	background: #111;
 	color: #fff;
 }
+
+img {
+	max-width: 100%;
+}
