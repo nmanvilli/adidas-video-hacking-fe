@@ -1,8 +1,16 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable()
 export class RestApiService  {
 
-	endpointDomain: 'http://localhost/';
+	baseURL = 'http://localhost:3000/';
+
+	constructor(private http: HttpClient) { }
 
 	getRandomFrames(){
+
+		//var frames = this.http.get( this.baseURL + 'getRandomFrames' );
 
 		var frames = [
 			{
