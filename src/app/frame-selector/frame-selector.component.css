@@ -4,10 +4,13 @@
     margin-bottom: 0;
     padding-left: 0;
 }
+
 #framesList li {
     flex: 0 1 auto;
     list-style-type: none;
 }
-#framesList a, #framesList img {
+
+#framesList a,
+#framesList img {
     display: block;
 }

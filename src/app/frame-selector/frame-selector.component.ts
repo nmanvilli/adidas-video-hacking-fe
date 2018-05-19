@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
 
-import { FrameThumbnail } from '../frame-thumbnail';
+import { FrameThumbnail } from '../template-objects/frame-thumbnail';
 
 @Component({
     selector: 'app-frame-selector',

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
 
+//import { FrameConverter } from '../component-objects/frame-converter';
 
 @Component({
     selector: 'app-video-player',
@@ -10,10 +11,10 @@ import { RestApiService } from '../services/rest-api.service';
 })
 export class VideoPlayerComponent {
     title = 'Adidas Video Hacking - Video playback';
-    apiService: RestApiService;
+    frameVariations = [];
 
     constructor( private restApiService: RestApiService ) {
-        this.apiService = restApiService;
+        this.frameVariations = restApiService.getAllVariations()
     }
 
     ngAfterViewInit() {
@@ -272,7 +273,7 @@ export class VideoPlayerComponent {
         var vidCtrl = new videoControls( video, canvas, playButton, seekBar );
 
         // Create frameConverter object
-        var frameConv = new frameConverter( video, canvas, this.apiService.getAllVariations() );
+        var frameConv = new frameConverter( video, canvas, this.frameVariations );
 
         // Get main content wrapper from DOM
         var mainContent = document.getElementById('main');
