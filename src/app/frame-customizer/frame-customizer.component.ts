@@ -1,47 +1,46 @@
-import {Component, AfterViewInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-// Load Fabric.js library
+// Load Fabric.js library <http://fabricjs.com/>
 import 'fabric';
 declare const fabric: any;
 
-// Load Fabric Brush <https://github.com/tennisonchan/fabric-brush>
+// Load Fabric Brush <https://github.com/tennisonchan/fabric-brush/>
 import '../../assets/js/fabric-brush.min.js';
+
 
 @Component({
     selector: 'app-frame-customizer',
     templateUrl: './frame-customizer.component.html',
     styleUrls: ['./frame-customizer.component.css'],
-    providers: [
-        RestApiService
-    ]
+    providers: [ RestApiService ]
 })
-export class FrameCustomizerComponent{
+export class FrameCustomizerComponent {
     title = 'Customize the frame!';
-	apiService;
-	frame;
-	sub: any;
+	apiService: RestApiService;
+	frame = [];
+	fabricCanvas: any;
+	sprayBrush: any;
 
-    constructor(private route: ActivatedRoute, private router: Router, private restApiService: RestApiService) {
+    constructor(private route: ActivatedRoute, private restApiService: RestApiService) {
         this.apiService = restApiService;
     }
 
     ngAfterViewInit() {
 
-		this.frame = [];
-		this.sub = this.route.queryParams.subscribe(params => {
+		// Get URL parameters (information about the current frame)
+		this.route.queryParams.subscribe(params => {
 			this.frame['id'] = params['id'];
 			this.frame['path'] = params['path'];
 		});
-		console.log(this.frame);
 
 		// Get canvas from DOM
 		var canvas = document.getElementById('drawingCanvas');
-		var ctx = (<HTMLCanvasElement>canvas).getContext('2d');
+		//var ctx = (<HTMLCanvasElement>canvas).getContext('2d');
 
 		// Set up Fabric.js canvas
-		var fabricCanvas = new fabric.Canvas('drawingCanvas', { isDrawingMode: true });
+		this.fabricCanvas = new fabric.Canvas('drawingCanvas', { isDrawingMode: true });
 		//fabricCanvas.setBackgroundColor(null, fabricCanvas.renderAll.bind(fabricCanvas));
 		fabric.Object.prototype.transparentCorners = false;
 
@@ -54,19 +53,19 @@ export class FrameCustomizerComponent{
 		sprayBrush.optimizeOverlapping = true;
 		sprayBrush.randomOpacity = false;
 		sprayBrush.width = 30;
-		fabricCanvas.freeDrawingBrush = sprayBrush;
+		this.fabricCanvas.freeDrawingBrush = sprayBrush;
 */
-		var sprayBrush = new fabric.InkBrush(fabricCanvas, {
+		this.sprayBrush = new fabric.InkBrush(this.fabricCanvas, {
 			width: 5,
 			inkAmount: 10
 		});
-		fabricCanvas.freeDrawingBrush = sprayBrush;
+		this.fabricCanvas.freeDrawingBrush = this.sprayBrush;
 
 		// Load image as Canvas background
 		fabric.Image.fromURL(this.frame['path'], function(img) {
-			fabricCanvas.setBackgroundImage(img, fabricCanvas.renderAll.bind(fabricCanvas), {
-			   scaleX: fabricCanvas.width / img.width,
-			   scaleY: fabricCanvas.height / img.height
+			this.fabricCanvas.setBackgroundImage(img, this.fabricCanvas.renderAll.bind(this.fabricCanvas), {
+			   scaleX: this.fabricCanvas.width / img.width,
+			   scaleY: this.fabricCanvas.height / img.height
 			});
 		});
 
@@ -85,7 +84,7 @@ export class FrameCustomizerComponent{
             );
 
             // Get drawing canvas as SVG
-			var jsonVariation = fabricCanvas.toDataURL('image/jpg', 0.1);
+			var jsonVariation = (<HTMLCanvasElement>canvas).toDataURL('image/jpg', 0.1);
             console.log(jsonVariation.length);
 
             // Show JSON canvas inside loading canvas

@@ -1,17 +1,16 @@
-import {Component, AfterViewInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
+
 
 @Component({
     selector: 'app-video-player',
     templateUrl: './video-player.component.html',
     styleUrls: ['./video-player.component.css'],
-    providers: [
-        RestApiService
-    ]
+    providers: [ RestApiService ]
 })
-export class VideoPlayerComponent implements AfterViewInit{
+export class VideoPlayerComponent {
     title = 'Adidas Video Hacking - Video playback';
-    apiService;
+    apiService: RestApiService;
 
     constructor( private restApiService: RestApiService ) {
         this.apiService = restApiService;

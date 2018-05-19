@@ -1,4 +1,3 @@
-
 /* --- Main layout --- */
 #main{
 	width: 90%;
@@ -10,7 +9,6 @@
 	width: 100%;
 	height: 100%;
 }
-
 .content {
 	display: table-cell;
 	vertical-align: middle;
@@ -18,32 +16,26 @@
 }
 
 
-
 /* --- Source video --- */
-
 #sourceVideo {
 	display: none;
 }
 
 
-
 /* --- Playing canvas --- */
-
 #playingCanvas {
 	background-color: #000;
 }
 
 
-
 /* --- Video controls --- */
-
-.video-controls{
+.video-controls {
 	display: flex;
 	margin: 10px auto 0 auto;
 }
 
 /* Video controls: play/pause button */
-#playPause{
+#playPause {
 	flex-grow: 0;
 	flex-shrink: 0;
 	width: 36px;
@@ -59,10 +51,10 @@
 	text-indent: 1px;
 	cursor: pointer;
 }
-#playPause:hover{
+#playPause:hover {
 	background-color: #222;
 }
-#playPause:focus{
+#playPause:focus {
 	outline: none;
 }
 
@@ -81,7 +73,7 @@
 	outline: none;
 }
 
-/* Video controls: seekbar's bar */
+/* Video controls: seekbar's rail */
 #seekBar::-webkit-slider-runnable-track {
 	width: 100%;
 	height: 8px;
