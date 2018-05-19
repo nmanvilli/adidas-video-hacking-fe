@@ -2,11 +2,13 @@
     <div class="site-inner">
         <section class="content">
 
-            <div class="frames-list">
-                <a id="a0" href=""><img id="img0"></a>
-                <a id="a1" href=""><img id="img1"></a>
-                <a id="a2" href=""><img id="img2"></a>
-            </div>
+            <ul id="framesList">
+                <li *ngFor="let frameThumb of frameThumbs">
+                    <a href="{{ frameThumb.customizeUrl }}">
+                        <img src="{{ frameThumb.path }}">
+                    </a>
+                </li>
+            </ul>
 
         </section>
     </div>

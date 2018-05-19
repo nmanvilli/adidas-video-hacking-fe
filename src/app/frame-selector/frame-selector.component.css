@@ -1,10 +1,13 @@
-.frames-list {
+#framesList {
     display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
 }
-.frames-list a {
-    display: block;
+#framesList li {
     flex: 0 1 auto;
+    list-style-type: none;
 }
-.frames-list img {
+#framesList a, #framesList img {
     display: block;
 }

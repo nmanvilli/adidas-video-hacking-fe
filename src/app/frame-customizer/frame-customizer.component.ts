@@ -20,7 +20,6 @@ export class FrameCustomizerComponent {
     title = 'Customize the frame!';
 	apiService: RestApiService;
 	frame = [];
-	fabricCanvas: any;
 	sprayBrush: any;
 
     constructor(private route: ActivatedRoute, private restApiService: RestApiService) {
@@ -40,7 +39,7 @@ export class FrameCustomizerComponent {
 		//var ctx = (<HTMLCanvasElement>canvas).getContext('2d');
 
 		// Set up Fabric.js canvas
-		this.fabricCanvas = new fabric.Canvas('drawingCanvas', { isDrawingMode: true });
+		var fabricCanvas = new fabric.Canvas('drawingCanvas', { isDrawingMode: true });
 		//fabricCanvas.setBackgroundColor(null, fabricCanvas.renderAll.bind(fabricCanvas));
 		fabric.Object.prototype.transparentCorners = false;
 
@@ -53,19 +52,19 @@ export class FrameCustomizerComponent {
 		sprayBrush.optimizeOverlapping = true;
 		sprayBrush.randomOpacity = false;
 		sprayBrush.width = 30;
-		this.fabricCanvas.freeDrawingBrush = sprayBrush;
+		fabricCanvas.freeDrawingBrush = sprayBrush;
 */
-		this.sprayBrush = new fabric.InkBrush(this.fabricCanvas, {
+		this.sprayBrush = new fabric.InkBrush(fabricCanvas, {
 			width: 5,
 			inkAmount: 10
 		});
-		this.fabricCanvas.freeDrawingBrush = this.sprayBrush;
+		fabricCanvas.freeDrawingBrush = this.sprayBrush;
 
 		// Load image as Canvas background
 		fabric.Image.fromURL(this.frame['path'], function(img) {
-			this.fabricCanvas.setBackgroundImage(img, this.fabricCanvas.renderAll.bind(this.fabricCanvas), {
-			   scaleX: this.fabricCanvas.width / img.width,
-			   scaleY: this.fabricCanvas.height / img.height
+			fabricCanvas.setBackgroundImage(img, fabricCanvas.renderAll.bind(fabricCanvas), {
+			   scaleX: fabricCanvas.width / img.width,
+			   scaleY: fabricCanvas.height / img.height
 			});
 		});
 
