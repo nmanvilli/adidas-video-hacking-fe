@@ -61,7 +61,8 @@ export class FrameCustomizerComponent {
 		// Set spray brush (from Fabric Brush addon)
 		this.sprayBrush = new fabric.InkBrush(this.drawingCanvas, {
 			width: 5,
-			inkAmount: 10
+			inkAmount: 10,
+			color: "#ff0000"
 		});
 		this.drawingCanvas.freeDrawingBrush = this.sprayBrush;
 
@@ -74,11 +75,6 @@ export class FrameCustomizerComponent {
 		// Update Loading Canvas on button click
         document.getElementById('loadVariationButton').addEventListener('click', function() {
 
-			// Get drawing canvas as JSON (background-image is not included)
-			//let jsonVariation = self.drawingCanvas.toDataURL('image/jpg', 0.1);
-			let jsonVariation = self.drawingCanvas.toDataURL( {format: 'jpeg' });
-			console.log(jsonVariation);
-
 			// Get canvas size
 			let canvasWidth = self.loadingCanvasCtx.canvas.width;
 			let canvasHeight = self.loadingCanvasCtx.canvas.height;	
@@ -89,15 +85,35 @@ export class FrameCustomizerComponent {
 				canvasWidth, canvasHeight
 			);
 
-			// Show JSON canvas inside loading canvas
-			let loadingImg = new Image();
-			loadingImg.src = jsonVariation;
-			loadingImg.onload = function() {
+			// Get drawn overlay as JSON (background-image is not included)
+			let upperCanvas = <HTMLCanvasElement>document.getElementsByClassName('upper-canvas').item(0);
+			let jsonOverlay = upperCanvas.toDataURL('image/png');
+
+			// Show inside loading canvas
+			let loadingBackground = new Image();
+			loadingBackground.src = self.frame['path'];
+			loadingBackground.onload = function() {
 				self.loadingCanvasCtx.drawImage(
-					loadingImg,
+					loadingBackground,
 					0, 0,
 					canvasWidth, canvasHeight
 				);
+
+				let loadingOverlay = new Image();
+				loadingOverlay.src = jsonOverlay;
+				loadingOverlay.onload = function() {
+					self.loadingCanvasCtx.drawImage(
+						loadingOverlay,
+						0, 0,
+						canvasWidth, canvasHeight
+					);
+
+					let jsonVariation = self.loadingCanvasCtx.canvas.toDataURL('image/jpg', 0);
+					console.log('Length = ' + jsonVariation.length);
+					console.log(jsonVariation);
+
+				};
+
 			};
 
 		});
