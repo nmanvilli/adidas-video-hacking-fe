@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
 
-import { FrameThumbnail } from '../template-objects/frame-thumbnail';
+import { FrameThumbnail } from './frame-thumbnail';
+
 
 @Component({
     selector: 'app-frame-selector',
@@ -10,15 +11,17 @@ import { FrameThumbnail } from '../template-objects/frame-thumbnail';
     providers: [ RestApiService ]
 })
 export class FrameSelectorComponent {
-    title = 'Choose the frame to customize!'
-    frameThumbs = [];
+
+    title = 'Choose the frame to customize!';
+
+    frameThumbs: Array<FrameThumbnail> = [];
+
 
     constructor(private restApiService: RestApiService) {
 
         let jsonRandomFrames = restApiService.getRandomFrames();
         for (let jsonFrame of jsonRandomFrames) {
-            let customizeUrl = '/edit?frame=' + jsonFrame.id + '&path=' + jsonFrame.path;
-            this.frameThumbs.push( new FrameThumbnail(customizeUrl, jsonFrame.path) );
+            this.frameThumbs.push( new FrameThumbnail(jsonFrame.id, jsonFrame.path) );
         }
 
     }
