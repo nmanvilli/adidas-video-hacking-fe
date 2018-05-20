@@ -10,9 +10,9 @@ export class RestApiService  {
 
 	getRandomFrames(){
 
-		//var frames = this.http.get( this.baseURL + 'getRandomFrames' );
+		//let frames = this.http.get( this.baseURL + 'getRandomFrames' );
 
-		var frames = [
+		let frames = [
 			{
 				'id': '0001',
 				'path': './assets/img/frame.jpg'
@@ -401,15 +401,19 @@ export class RestApiService  {
 		context2.closePath();
 
 		// Array of variation overlays
-		var variations = [];
+		let variations = [];
 		
 		// Fill the array by alternating the two example canvases
 		for (var i = 0; i < numberOfVariations; i++) {
 			if ( i % 2 ) {
-				variations[i] = canvas1.toDataURL();
+				variations[i] = {
+					'json': canvas1.toDataURL()
+				};
 			}
 			else {
-				variations[i] = canvas2.toDataURL();
+				variations[i] = {
+					'json': canvas2.toDataURL()
+				};
 			}
 		}
 
