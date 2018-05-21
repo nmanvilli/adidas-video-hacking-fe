@@ -31,7 +31,7 @@ export class FrameCustomizerComponent {
 	sprayBrush: fabric.InkBrush;
 
 	// Variable to hold current brush
-	currentBrush: any;
+	currentBrush: fabric.Brush;
 
 
     constructor(private route: ActivatedRoute, private restApiService: RestApiService) {
@@ -157,7 +157,7 @@ export class FrameCustomizerComponent {
 		let canvasWidth = self.drawingCanvas.width;
 		let canvasHeight = self.drawingCanvas.height;	
 
-		// Temporary Canvas that will hold the reassembled frame
+		// Temporary Canvas that will hold the reassembled variation
 		let newFrame = document.createElement('canvas');
 		newFrame.width = canvasWidth;
 		newFrame.height = canvasHeight;
@@ -167,15 +167,12 @@ export class FrameCustomizerComponent {
 		let canvasBackground = new Image();
 		canvasBackground.src = self.frame['path'];
 
-		// Get drawn overlay as JSON (background-image is not included)
+		// Get drawn overlay as PNG (background-image is not included)
 		let canvasOverlay = new Image();
 		let upperCanvas = <HTMLCanvasElement>document.getElementsByClassName('upper-canvas').item(0);
-		let pngOverlay = upperCanvas.toDataURL('image/png');
-		canvasOverlay.src = pngOverlay;
+		canvasOverlay.src = upperCanvas.toDataURL('image/png');
 
-		// Build temporary canvas
 		canvasBackground.onload = function() {
-
 			// Draw background on temporary Canvas
 			newFrameCtx.drawImage(
 				canvasBackground,
@@ -191,7 +188,7 @@ export class FrameCustomizerComponent {
 					canvasWidth, canvasHeight
 				);
 
-				// Export temporary Canvas as image and send it to the server
+				// Export temporary Canvas as JPG and send it to the server
 				let jpgVariation = newFrame.toDataURL('image/jpg', 0);
 				self.sendVariationToServer(jpgVariation);
 			};
