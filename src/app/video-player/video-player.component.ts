@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+
+// Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
 
+// Load custom objects
 import { FrameConverter } from './frame-converter';
 import { VideoControls } from './video-controls';
 
@@ -14,14 +17,17 @@ export class VideoPlayerComponent {
 
     title = 'Adidas Video Hacking - Video playback';
 
+    // DOM elements
     mainContent: HTMLMainElement;
     video: HTMLVideoElement;
     canvas: HTMLCanvasElement;
 
+    // Frames sequencer and array of frames
     frameConv: FrameConverter;
     frameVariations: Array<{ json: string }> = [];
 
-    resizeTimer;
+    // Timer used by the resize event
+    resizeTimer: number;
 
 
     constructor( private restApiService: RestApiService ) {
@@ -58,12 +64,12 @@ export class VideoPlayerComponent {
         this.mainContent.style.maxWidth = this.video.width.toString() + 'px';
 
         // Make canvas responsive (using a resize timer to avoid viewport size inconsistencies)
-        this.resizeTimer = setTimeout(
+        this.resizeTimer = window.setTimeout(
             function () { self.resizeCanvas(); },
             20
         );
         window.onresize = function() {
-            self.resizeTimer = setTimeout(
+            self.resizeTimer = window.setTimeout(
                 function () { self.resizeCanvas(); },
                 20
             );
@@ -71,10 +77,14 @@ export class VideoPlayerComponent {
 
     } // end of ngAfterViewInit()
 
+
     resizeCanvas() {
+        // Resize canvas
         let currentWidth = this.mainContent.clientWidth;
         this.canvas.setAttribute( 'width', currentWidth.toString() );
         this.canvas.setAttribute( 'height', (currentWidth * this.video.height / this.video.width).toString() );
+
+        // Re-render current frame
         this.frameConv.renderFrame();
     }
 
