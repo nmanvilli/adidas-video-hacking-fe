@@ -120,17 +120,18 @@ export class FrameCustomizerComponent {
 		// This variable used to pass ourself to event call-backs
 		let self:FrameCustomizerComponent = this;
 
-		// Create Fabric Loading Canvas
+		// Create Loading Canvas
 		let loadingCanvasCtx = (<HTMLCanvasElement>document.getElementById('loadingCanvas')).getContext('2d');
 		let canvasWidth = loadingCanvasCtx.canvas.width;
 		let canvasHeight = loadingCanvasCtx.canvas.height;
 
-		// Clear loading canvas
+		// Clear Loading Canvas
 		loadingCanvasCtx.clearRect(
 			0, 0,
 			canvasWidth, canvasHeight
 		);
 
+		// Draw variation on the Loading Canvas
 		let loadingImg = new Image();
 		loadingImg.src = jpgVariation;
 		loadingImg.onload = function() {
