@@ -12,10 +12,10 @@ import '../../assets/js/fabric-brush.min.js';
 
 
 @Component({
-    selector: 'app-frame-customizer',
+	selector: 'app-frame-customizer',
     templateUrl: './frame-customizer.component.html',
     styleUrls: ['./frame-customizer.component.css'],
-    providers: [ RestApiService ]
+	providers: [ RestApiService ]
 })
 export class FrameCustomizerComponent {
 
