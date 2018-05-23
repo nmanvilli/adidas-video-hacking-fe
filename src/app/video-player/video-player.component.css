@@ -1,11 +1,11 @@
 /* --- Main layout --- */
-#main{
-	width: 90%;
-	height: 100%;
-	margin: 0 auto;
-}
 .site-inner {
+	width: 100%;
+	height: 100%;
+}
+#main {
 	display: table;
+	margin: 0 auto;
 	width: 100%;
 	height: 100%;
 }

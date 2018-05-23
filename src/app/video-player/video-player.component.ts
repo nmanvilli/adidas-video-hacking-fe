@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
+import { Observable } from 'rxjs';
 
 // Load custom objects
 import { FrameConverter } from './frame-converter';
@@ -24,23 +25,29 @@ export class VideoPlayerComponent {
 
     // Frames sequencer and array of frames
     frameConv: FrameConverter;
-    frameVariations: Array<{ json: string }> = [];
+    frameVariations: Array<{ jpg: string }> = [];
 
     // Timer used by the resize event
     resizeTimer: number;
 
+    // Observable containing the API request results
+    apiRequest: Observable<Object>;
+
 
     constructor( private restApiService: RestApiService ) {
-        
-        restApiService.getAllVariations()
-            .subscribe( (data:Array<{ json:string }>) => {
-                this.frameVariations = data;
-            });
-
+        this.apiRequest = this.restApiService.getAllVariations();
     }
 
-    ngAfterViewInit() {
 
+    ngAfterViewInit() {
+        this.apiRequest.subscribe( (data:Array<{ jpg:string }>) => {
+            this.frameVariations = data;
+            this.init();
+        })
+    }
+
+
+    init() {
         // This variable used to pass ourself to event call-backs
         let self:VideoPlayerComponent = this;
 

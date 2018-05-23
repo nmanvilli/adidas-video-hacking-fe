@@ -53,6 +53,7 @@ export class FrameCustomizerComponent {
 
 		// Create Fabric Drawing Canvas from DOM
 		this.drawingCanvas = new fabric.Canvas('drawingCanvas');
+		(<HTMLCanvasElement>document.getElementsByClassName('canvas-container').item(0)).style.margin = '0 auto';
 
 		// Get Frame Brush Addon canvas
 		this.upperCanvas = <HTMLCanvasElement>document.getElementsByClassName('upper-canvas').item(0);
@@ -70,7 +71,7 @@ export class FrameCustomizerComponent {
 		// Prepare canvas for drawing
 		this.drawingCanvas.isDrawingMode = true;
 
-		// Update Loading Canvas on button click
+		// Drawing complete button
         this.doneButton.addEventListener('click', function() {
 
 			/* IMPORTANT NOTE:
@@ -90,6 +91,7 @@ export class FrameCustomizerComponent {
 
 		});
 		
+		// Drawing clear button
 		this.resetButton.addEventListener('click', function() {
 
 			// Clear canvas
@@ -142,12 +144,9 @@ export class FrameCustomizerComponent {
 	// Function to send the Canvas to the server as a JPG string
 	sendVariationToServer(jpgVariation) {
 
-		console.log('Length = ' + jpgVariation.length);
 		console.log(jpgVariation);
 
-		// This variable used to pass ourself to event call-backs
-		let self:FrameCustomizerComponent = this;
-
+/*
 		// Create Loading Canvas
 		let loadingCanvasCtx = (<HTMLCanvasElement>document.getElementById('loadingCanvas')).getContext('2d');
 		let canvasWidth = loadingCanvasCtx.canvas.width;
@@ -171,6 +170,7 @@ export class FrameCustomizerComponent {
 			);
 
 		};
+*/
 
 	} // end of sendVariationToServer()
 
@@ -216,7 +216,7 @@ export class FrameCustomizerComponent {
 				);
 
 				// Export temporary Canvas as JPG and send it to the server
-				let jpgVariation = newFrame.toDataURL('image/jpg', 0);
+				let jpgVariation = newFrame.toDataURL('image/jpeg', 1);
 				self.sendVariationToServer(jpgVariation);
 			};
 

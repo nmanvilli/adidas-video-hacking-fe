@@ -18,7 +18,7 @@ export class FrameConverter {
     framebufferCtx: CanvasRenderingContext2D;
 
     // Array of variation overlays to apply to the frames
-    variations: Array<{ json: string }> = [];
+    variations: Array<{ jpg: string }> = [];
 
     // Main function (constructor)
     constructor(video, canvas, variations)  {
@@ -94,7 +94,7 @@ export class FrameConverter {
         // Apply corresponding variation overlay
         if (currentFrameIndex in this.variations) {
             let img = new Image();
-            img.src = this.variations[currentFrameIndex].json;
+            img.src = this.variations[currentFrameIndex].jpg;
             this.framebufferCtx.drawImage(
                 img,
                 0, 0,
