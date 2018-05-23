@@ -31,7 +31,12 @@ export class VideoPlayerComponent {
 
 
     constructor( private restApiService: RestApiService ) {
-        this.frameVariations = restApiService.getAllVariations()
+        
+        restApiService.getAllVariations()
+            .subscribe( (data:Array<{ json:string }>) => {
+                this.frameVariations = data;
+            });
+
     }
 
     ngAfterViewInit() {

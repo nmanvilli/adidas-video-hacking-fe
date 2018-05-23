@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
+import { Observable } from 'rxjs';
 
 // Load Template Models
 import { FrameThumbnail } from './frame-thumbnail';
@@ -23,12 +24,13 @@ export class FrameSelectorComponent {
     constructor(private restApiService: RestApiService) {
 
         // Get random frames from the server
-        let jsonRandomFrames = restApiService.getRandomFrames();
-
-        // Add the frames to the array as FrameThumbnail objects
-        for (let jsonFrame of jsonRandomFrames) {
-            this.frameThumbs.push( new FrameThumbnail(jsonFrame.id, jsonFrame.path) );
-        }
+        restApiService.getRandomFrames()
+            .subscribe( (data:Array<{ id:string, path:string }>) => {
+                // Add the frames to the array as FrameThumbnail objects
+                for (let jsonFrame of data) {
+                    this.frameThumbs.push( new FrameThumbnail(jsonFrame.id, jsonFrame.path) );
+                }
+            });
 
     }
 
