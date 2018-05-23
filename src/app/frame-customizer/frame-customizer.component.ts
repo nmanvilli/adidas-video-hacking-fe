@@ -28,7 +28,8 @@ export class FrameCustomizerComponent {
 	drawingCanvas: fabric.Canvas;
 
 	// Create brushes
-	sprayBrush: fabric.InkBrush;
+	messyBrush: fabric.InkBrush;
+	preciseBrush: fabric.SprayBrush;
 
 	// Variable to hold current brush
 	currentBrush: fabric.Brush;
@@ -64,15 +65,19 @@ export class FrameCustomizerComponent {
 			);
 		});
 
-		// Set Spray brush (from Fabric Brush addon)
-		this.sprayBrush = new fabric.InkBrush(this.drawingCanvas, {
+		// Set Messy Spray brush (from Fabric Brush addon)
+		this.messyBrush = new fabric.InkBrush(this.drawingCanvas, {
 			width: 5,
 			inkAmount: 10,
 			color: "#ff0000"
 		});
 
+		// Set Precise Spray brush (from Fabric Brush addon)
+		this.preciseBrush = new fabric.SprayBrush(this.drawingCanvas, {
+		});
+
 		// Set current brush to Spray brush
-		this.drawingCanvas.freeDrawingBrush = this.sprayBrush;
+		this.drawingCanvas.freeDrawingBrush = this.messyBrush;
 
 		// Prepare canvas for drawing
 		this.drawingCanvas.isDrawingMode = true;

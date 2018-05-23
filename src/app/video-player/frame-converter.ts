@@ -119,14 +119,16 @@ export class FrameConverter {
             console.log('Frame ' + (currentFrameIndex + 1));
         }
 
-        // Apply variation as overlay
-        let img = new Image();
-        img.src = this.variations[currentFrameIndex].json;
-        this.framebufferCtx.drawImage(
-            img,
-            0, 0,
-            this.canvas.width, this.canvas.height
-        );
+        if (currentFrameIndex in this.variations) {
+            // Apply variation as overlay
+            let img = new Image();
+            img.src = this.variations[currentFrameIndex].json;
+            this.framebufferCtx.drawImage(
+                img,
+                0, 0,
+                this.canvas.width, this.canvas.height
+            );
+        }
 
     }
 

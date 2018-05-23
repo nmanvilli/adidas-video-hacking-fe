@@ -32,7 +32,7 @@ export class RestApiService  {
 
     getAllVariations() {
 
-        var numberOfVariations = 320
+		var numberOfVariations = 320;
 
 		// Example canvas 1
 		var context1, canvas1;
