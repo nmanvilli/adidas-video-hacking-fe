@@ -7,9 +7,8 @@ import { RestApiService } from '../services/rest-api.service';
 // Load Fabric.js library <http://fabricjs.com/>
 import { fabric } from 'fabric';
 
-// Load Fabric Brush addon <https://github.com/tennisonchan/fabric-brush/>
-import '../../assets/js/fabric-brush.min.js';
-
+// Load Frame Customizer Controls object
+import { FrameCustomizerControls } from './frame-customizer-controls';
 
 @Component({
 	selector: 'app-frame-customizer',
@@ -24,15 +23,13 @@ export class FrameCustomizerComponent {
 	// Object representing the current frame
 	frame: { id :string, path: string };
 
-	// Get canvases from DOM
+	// Fabric Canvas for drawing
 	drawingCanvas: fabric.Canvas;
 
-	// Create brushes
-	messyBrush: fabric.InkBrush;
-	preciseBrush: fabric.SprayBrush;
+	doneButton: HTMLButtonElement;
 
-	// Variable to hold current brush
-	currentBrush: fabric.Brush;
+	// Tools and color controls
+	controls: FrameCustomizerControls;
 
 
     constructor(private route: ActivatedRoute, private restApiService: RestApiService) {
@@ -53,6 +50,9 @@ export class FrameCustomizerComponent {
 		// Create Fabric Drawing Canvas from DOM
 		this.drawingCanvas = new fabric.Canvas('drawingCanvas');
 
+		// Get "Done" button from DOM
+		this.doneButton = <HTMLButtonElement>document.getElementById('doneBtn')
+
 		// Load frame image as Canvas background
 		fabric.Image.fromURL(this.frame['path'], function(img) {
 			self.drawingCanvas.setBackgroundImage(
@@ -65,25 +65,14 @@ export class FrameCustomizerComponent {
 			);
 		});
 
-		// Set Messy Spray brush (from Fabric Brush addon)
-		this.messyBrush = new fabric.InkBrush(this.drawingCanvas, {
-			width: 5,
-			inkAmount: 10,
-			color: "#ff0000"
-		});
-
-		// Set Precise Spray brush (from Fabric Brush addon)
-		this.preciseBrush = new fabric.SprayBrush(this.drawingCanvas, {
-		});
-
-		// Set current brush to Spray brush
-		this.drawingCanvas.freeDrawingBrush = this.messyBrush;
+		// Create drawing controls
+		this.controls = new FrameCustomizerControls(this.drawingCanvas);
 
 		// Prepare canvas for drawing
 		this.drawingCanvas.isDrawingMode = true;
 
 		// Update Loading Canvas on button click
-        document.getElementById('uploadBtn').addEventListener('click', function() {
+        this.doneButton.addEventListener('click', function() {
 
 			/* IMPORTANT NOTE:
 			 *

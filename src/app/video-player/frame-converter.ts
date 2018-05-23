@@ -1,8 +1,6 @@
 
 export class FrameConverter {
 
-    debug: boolean = false; // Enable to print video time and frame number in console
-
     fps: number = 8; // Frames per second
     renderInterval: number = 25; // Video refresh timer (milliseconds)
 
@@ -90,8 +88,19 @@ export class FrameConverter {
             this.canvas.width, this.canvas.height
         );
 
+        // Calculate current frame  number
+        let currentFrameIndex = Math.floor( this.video.currentTime * this.fps );
+
         // Apply corresponding variation overlay
-        this.applyFrameVariation();
+        if (currentFrameIndex in this.variations) {
+            let img = new Image();
+            img.src = this.variations[currentFrameIndex].json;
+            this.framebufferCtx.drawImage(
+                img,
+                0, 0,
+                this.canvas.width, this.canvas.height
+            );
+        }
 
         // Retrieve graphic data from the frame-buffer canvas
         let data = this.framebufferCtx.getImageData(
@@ -104,33 +113,5 @@ export class FrameConverter {
         
         return;
     }
-
-
-    // Apply frame variation to the canvas
-    applyFrameVariation() {
-
-        // Calculate current frame  number
-        let currentTime = this.video.currentTime;
-        let currentFrameIndex = Math.floor( currentTime * this.fps );
-
-        // Debug video time and frame number
-        if (this.debug) {
-            console.log('Time: ' + currentTime);
-            console.log('Frame ' + (currentFrameIndex + 1));
-        }
-
-        if (currentFrameIndex in this.variations) {
-            // Apply variation as overlay
-            let img = new Image();
-            img.src = this.variations[currentFrameIndex].json;
-            this.framebufferCtx.drawImage(
-                img,
-                0, 0,
-                this.canvas.width, this.canvas.height
-            );
-        }
-
-    }
-
 
 }
