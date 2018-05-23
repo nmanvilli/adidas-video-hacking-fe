@@ -26,7 +26,11 @@ export class FrameCustomizerComponent {
 	// Fabric Canvas for drawing
 	drawingCanvas: fabric.Canvas;
 
+	// Upper Canvas added by Fabric Brush addon
+	upperCanvas: HTMLCanvasElement;
+
 	doneButton: HTMLButtonElement;
+	resetButton: HTMLButtonElement;
 
 	// Tools and color controls
 	controls: FrameCustomizerControls;
@@ -50,20 +54,15 @@ export class FrameCustomizerComponent {
 		// Create Fabric Drawing Canvas from DOM
 		this.drawingCanvas = new fabric.Canvas('drawingCanvas');
 
+		// Get Frame Brush Addon canvas
+		this.upperCanvas = <HTMLCanvasElement>document.getElementsByClassName('upper-canvas').item(0);
+
 		// Get "Done" button from DOM
-		this.doneButton = <HTMLButtonElement>document.getElementById('doneBtn')
+		this.doneButton = <HTMLButtonElement>document.getElementById('doneBtn');
+		this.resetButton = <HTMLButtonElement>document.getElementById('resetBtn');
 
 		// Load frame image as Canvas background
-		fabric.Image.fromURL(this.frame['path'], function(img) {
-			self.drawingCanvas.setBackgroundImage(
-				img,
-				self.drawingCanvas.renderAll.bind( self.drawingCanvas ),
-				{
-					scaleX: self.drawingCanvas.width / img.width,
-					scaleY: self.drawingCanvas.height / img.height
-				}
-			);
-		});
+		this.drawBackground();
 
 		// Create drawing controls
 		this.controls = new FrameCustomizerControls(this.drawingCanvas);
@@ -91,6 +90,22 @@ export class FrameCustomizerComponent {
 
 		});
 		
+		this.resetButton.addEventListener('click', function() {
+
+			// Clear canvas
+			self.drawingCanvas.clear();
+			self.drawBackground();
+
+			/* IMPORTANT NOTE:
+			 *
+			 *	The following two lines of code are needed because the
+			 *	Fabric Brush addon works on an overlaying canvas.
+			 */
+			let upperCtx = self.upperCanvas.getContext('2d');
+			upperCtx.clearRect(0, 0, self.upperCanvas.width, self.upperCanvas.height);
+
+		});
+
 		/*
 		const wsIp = '127.0.0.1';
 		const wsPort = 8989;
@@ -104,6 +119,25 @@ export class FrameCustomizerComponent {
 
 	} // end of ngAfterViewInit()
 
+
+	
+	drawBackground() {
+
+		// This variable used to pass ourself to event call-backs
+		let self:FrameCustomizerComponent = this;
+
+		// Load frame image as Canvas background
+		fabric.Image.fromURL(this.frame['path'], function(img) {
+			self.drawingCanvas.setBackgroundImage(
+				img,
+				self.drawingCanvas.renderAll.bind( self.drawingCanvas ),
+				{
+					scaleX: self.drawingCanvas.width / img.width,
+					scaleY: self.drawingCanvas.height / img.height
+				}
+			);
+		});
+	}
 
 	// Function to send the Canvas to the server as a JPG string
 	sendVariationToServer(jpgVariation) {
@@ -163,8 +197,7 @@ export class FrameCustomizerComponent {
 
 		// Get drawn overlay as PNG (background-image is not included)
 		let canvasOverlay = new Image();
-		let upperCanvas = <HTMLCanvasElement>document.getElementsByClassName('upper-canvas').item(0);
-		canvasOverlay.src = upperCanvas.toDataURL('image/png');
+		canvasOverlay.src = this.upperCanvas.toDataURL('image/png');
 
 		canvasBackground.onload = function() {
 			// Draw background on temporary Canvas

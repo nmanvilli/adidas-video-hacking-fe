@@ -35,8 +35,7 @@ export class FrameCustomizerControls {
 
         // Set Messy Spray brush (from Fabric Brush addon)
 		this.messyBrush = new fabric.InkBrush(this.drawingCanvas, {
-			width: 30,
-			inkAmount: 10
+            width: 30,
 		});
 
 		// Set Precise Spray brush (from Fabric Brush addon)
@@ -44,9 +43,9 @@ export class FrameCustomizerControls {
             width: 10
 		});
 
-        // Set current brush to Spray brush
+        // Set starting color and brush
         this.currentColor = this.color1;
-        this.setBrush(this.preciseBrush);
+        this.setBrush(this.messyBrush);
 
         // Get DOM button elements
         this.messyBrushButton = <HTMLButtonElement>document.getElementById('messyBrushButton');
