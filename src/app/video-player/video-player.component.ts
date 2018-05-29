@@ -4,9 +4,13 @@ import { Component } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
 import { Observable } from 'rxjs';
 
+// Static JS loader service
+import { StaticScriptsService } from '../services/static-scripts.service';
+
 // Load custom objects
 import { FrameConverter } from './frame-converter';
 import { VideoControls } from './video-controls';
+
 
 @Component({
     selector: 'app-video-player',
@@ -33,13 +37,15 @@ export class VideoPlayerComponent {
     // Observable containing the API request results
     apiRequest: Observable<Object>;
 
-
     constructor( private restApiService: RestApiService ) {
         this.apiRequest = this.restApiService.getAllVariations();
     }
 
 
     ngAfterViewInit() {
+
+        StaticScriptsService.load('pleaserotate.min.js', true);
+
         this.apiRequest.subscribe( (data:Array<{ jpg:string }>) => {
             this.frameVariations = data;
             this.init();

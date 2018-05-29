@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
 
+// Static JS loader service
+import { StaticScriptsService } from '../services/static-scripts.service';
 
 @Component({
 	selector: 'app-frame-sharing',
@@ -34,6 +36,8 @@ export class FrameSharingComponent {
 
     ngAfterViewInit() {
 		
+		StaticScriptsService.load('pleaserotate.min.js', true);
+
 		// This variable used to pass ourself to event call-backs
         let self:FrameSharingComponent = this;
 

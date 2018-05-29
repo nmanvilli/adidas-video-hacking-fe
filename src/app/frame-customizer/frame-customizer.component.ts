@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
 
+// Static JS loader service
+import { StaticScriptsService } from '../services/static-scripts.service';
+
 // Load Fabric.js library <http://fabricjs.com/>
 import { fabric } from 'fabric';
 
@@ -47,7 +50,9 @@ export class FrameCustomizerComponent {
 
 
     ngAfterViewInit() {
-		
+
+		StaticScriptsService.load('pleaserotate.min.js', true);
+
 		// This variable used to pass ourself to event call-backs
         let self:FrameCustomizerComponent = this;
 
@@ -145,32 +150,6 @@ export class FrameCustomizerComponent {
 	sendVariationToServer(jpgVariation) {
 
 		console.log(jpgVariation);
-
-/*
-		// Create Loading Canvas
-		let loadingCanvasCtx = (<HTMLCanvasElement>document.getElementById('loadingCanvas')).getContext('2d');
-		let canvasWidth = loadingCanvasCtx.canvas.width;
-		let canvasHeight = loadingCanvasCtx.canvas.height;
-
-		// Clear Loading Canvas
-		loadingCanvasCtx.clearRect(
-			0, 0,
-			canvasWidth, canvasHeight
-		);
-
-		// Draw variation on the Loading Canvas
-		let loadingImg = new Image();
-		loadingImg.src = jpgVariation;
-		loadingImg.onload = function() {
-
-			loadingCanvasCtx.drawImage(
-				loadingImg,
-				0, 0,
-				canvasWidth, canvasHeight
-			);
-
-		};
-*/
 
 	} // end of sendVariationToServer()
 
