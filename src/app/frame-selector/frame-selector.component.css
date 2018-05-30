@@ -27,7 +27,18 @@
     list-style-type: none;
 }
 
-#framesList a,
+#framesList a {
+    display: block;
+    overflow: hidden;
+}
+
 #framesList img {
     display: block;
+    position: relative;
+    width: 120%;
+    top: -10%;
+}
+
+h2 {
+    text-align: center;
 }

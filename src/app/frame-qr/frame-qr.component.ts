@@ -8,14 +8,17 @@ import { RestApiService } from '../services/rest-api.service';
 import { StaticScriptsService } from '../services/static-scripts.service';
 
 @Component({
-	selector: 'app-frame-sharing',
-    templateUrl: './frame-sharing.component.html',
-    styleUrls: ['./frame-sharing.component.css'],
+	selector: 'app-frame-qr',
+    templateUrl: './frame-qr.component.html',
+    styleUrls: ['./frame-qr.component.css'],
 	providers: [ RestApiService ]
 })
-export class FrameSharingComponent {
+export class FrameQRComponent {
 
 	title = 'Share the frame!';
+
+	// URL for the QR code
+	shareUrl: string;
 
 	// Object representing the current frame
 	frame: { id: string, path: string, variationPath: string };
@@ -28,6 +31,7 @@ export class FrameSharingComponent {
 		// Get URL parameters (info about the current frame and variation)
 		this.route.queryParams.subscribe(params => {
 			this.frame = { id: params['id'], path: params['path'], variationPath: params['variationPath'] };
+			this.shareUrl = 'http://nmanvilli.com/';
 		});
 	}
 
@@ -37,7 +41,7 @@ export class FrameSharingComponent {
 		//StaticScriptsService.loadJs('pleaserotate.min.js');
 
 		// This variable used to pass ourself to event call-backs
-        let self:FrameSharingComponent = this;
+        let self:FrameQRComponent = this;
 
 		// Create Fabric Drawing Canvas from DOM
 		this.canvasCtx = (<HTMLCanvasElement>document.getElementById('showingCanvas')).getContext('2d');

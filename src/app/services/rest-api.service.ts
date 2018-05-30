@@ -8,14 +8,19 @@ export class RestApiService  {
 
 	constructor(private http: HttpClient) { }
 
+	// Returns an array of random frames
 	getRandomFrames(){
 		let frames = this.http.get( this.baseURL + 'getRandomFrames' );
 		return frames;
 	}
 
-    getAllVariations() {
-		let variations = this.http.get( this.baseURL + 'getAllVariations' );
-		return variations;
+	// Save a variation. Returns file path for the new file.
+	saveVariation(imageString, frameNum) {
+		return this.http.post(
+			this.baseURL + 'saveVariation',
+			{ image: imageString, frame: frameNum },
+			{ responseType: 'text' }
+		).toPromise();
 	}
 
 }

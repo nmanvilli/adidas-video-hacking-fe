@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
@@ -17,14 +18,14 @@ import { FrameThumbnail } from './frame-thumbnail';
     styleUrls: ['./frame-selector.component.css'],
     providers: [ RestApiService ]
 })
-export class FrameSelectorComponent {
+export class FrameSelectorComponent implements AfterViewInit {
 
     title = 'Choose the frame to customize!';
 
     frameThumbs: Array<FrameThumbnail> = [];
 
 
-    constructor(private restApiService: RestApiService) {
+    constructor(private router: Router, private restApiService: RestApiService) {
 
         // Get random frames from the server
         restApiService.getRandomFrames()
@@ -38,7 +39,7 @@ export class FrameSelectorComponent {
     }
 
     ngAfterViewInit() {
-        StaticScriptsService.loadJs('pleaserotate.min.js', true);
+        //StaticScriptsService.loadJs('pleaserotate.min.js');
     }
 
 }

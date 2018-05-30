@@ -4,11 +4,13 @@
 
             <ul id="framesList">
                 <li *ngFor="let frameThumb of frameThumbs" class="animated fadeInUp">
-                    <a href="{{ frameThumb.customizeUrl }}">
-                        <img src="{{ frameThumb.path }}">
+                    <a [routerLink]="['/edit']" [queryParams]="{frame: frameThumb.id, path:frameThumb.path }">
+                        <img src="{{ frameThumb.path }}" class="animated slideInUp">
                     </a>
                 </li>
             </ul>
+
+            <h2>Choose your frame!</h2>
 
         </section>
     </main>

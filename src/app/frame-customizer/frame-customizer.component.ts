@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, AfterViewInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
@@ -10,8 +10,9 @@ import { StaticScriptsService } from '../services/static-scripts.service';
 // Load Fabric.js library <http://fabricjs.com/>
 import { fabric } from 'fabric';
 
-// Load Frame Customizer Controls object
+// Load custom objects
 import { FrameCustomizerControls } from './frame-customizer-controls';
+import { PointerControls } from './pointer-controls';
 
 @Component({
 	selector: 'app-frame-customizer',
@@ -19,7 +20,7 @@ import { FrameCustomizerControls } from './frame-customizer-controls';
     styleUrls: ['./frame-customizer.component.css'],
 	providers: [ RestApiService ]
 })
-export class FrameCustomizerComponent {
+export class FrameCustomizerComponent implements AfterViewInit {
 
 	title = 'Customize the frame!';
 
@@ -32,14 +33,15 @@ export class FrameCustomizerComponent {
 	// Upper Canvas added by Fabric Brush addon
 	upperCanvas: HTMLCanvasElement;
 
-	doneButton: HTMLButtonElement;
 	resetButton: HTMLButtonElement;
+	doneButton: HTMLButtonElement;
 
 	// Tools and color controls
 	controls: FrameCustomizerControls;
+	pointerControls: PointerControls;
 
 
-    constructor(private route: ActivatedRoute, private restApiService: RestApiService) {
+    constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService) {
 
 		// Get URL parameters (info about the current frame)
 		this.route.queryParams.subscribe(params => {
@@ -51,7 +53,7 @@ export class FrameCustomizerComponent {
 
     ngAfterViewInit() {
 
-		StaticScriptsService.loadJs('pleaserotate.min.js', true);
+		//StaticScriptsService.loadJs('pleaserotate.min.js');
 
 		// This variable used to pass ourself to event call-backs
         let self:FrameCustomizerComponent = this;
@@ -64,14 +66,17 @@ export class FrameCustomizerComponent {
 		this.upperCanvas = <HTMLCanvasElement>document.getElementsByClassName('upper-canvas').item(0);
 
 		// Get "Done" button from DOM
-		this.doneButton = <HTMLButtonElement>document.getElementById('doneBtn');
 		this.resetButton = <HTMLButtonElement>document.getElementById('resetBtn');
+		this.doneButton = <HTMLButtonElement>document.getElementById('doneBtn');
 
 		// Load frame image as Canvas background
 		this.drawBackground();
 
 		// Create drawing controls
 		this.controls = new FrameCustomizerControls(this.drawingCanvas);
+
+		// Create pointer controls
+		this.pointerControls = new PointerControls();
 
 		// Prepare canvas for drawing
 		this.drawingCanvas.isDrawingMode = true;
@@ -84,7 +89,7 @@ export class FrameCustomizerComponent {
 			 *	The correct way to export the Fabric canvas to a JPG string and send it to
 			 *	the server would be:
 			 *
-			 * 		let jpgVariation = self.drawingCanvas.toDataURL('image/jpg', 0);
+			 * 		let jpgVariation = self.drawingCanvas.toDataURL('image/jpg', 1);
 			 *		self.sendVariationToServer(jpgVariation);
 			 *
 			 * 	Unfortunately the way the Fabric Brush addon is implemented prevents this.
@@ -113,17 +118,6 @@ export class FrameCustomizerComponent {
 
 		});
 
-		/*
-		const wsIp = '127.0.0.1';
-		const wsPort = 8989;
-
-		let connection = new WebSocket('ws://' + wsIp + ':' + wsPort);
-
-		connection.onmessage = function (e) {
-			console.log(e.data);
-		};
-		*/
-
 	} // end of ngAfterViewInit()
 
 
@@ -149,7 +143,17 @@ export class FrameCustomizerComponent {
 	// Function to send the Canvas to the server as a JPG string
 	sendVariationToServer(jpgVariation) {
 
-		console.log(jpgVariation);
+		//console.log(jpgVariation);
+
+		this.restApiService.saveVariation(jpgVariation, this.frame.id).then(
+			data => {
+				let fileName = data;
+				// Redirect to Frame Sharing afterwards
+				this.router.navigate( ['/share-from-store'],{queryParams:
+					{id: this.frame.id, path: this.frame.path, variationPath: fileName}
+				});
+			}
+		);
 
 	} // end of sendVariationToServer()
 

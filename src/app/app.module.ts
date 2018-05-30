@@ -13,6 +13,7 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import { FrameSelectorComponent } from './frame-selector/frame-selector.component';
 import { FrameCustomizerComponent } from './frame-customizer/frame-customizer.component';
+import { FrameQRComponent } from './frame-qr/frame-qr.component';
 import { FrameSharingComponent } from './frame-sharing/frame-sharing.component';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { FrameSharingComponent } from './frame-sharing/frame-sharing.component';
     VideoPlayerComponent,
     FrameSelectorComponent,
     FrameCustomizerComponent,
+    FrameQRComponent,
     FrameSharingComponent
   ],
   imports: [

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
@@ -17,7 +18,7 @@ import { FrameConverter } from './frame-converter';
     styleUrls: ['./video-player.component.css'],
     providers: [ RestApiService ]
 })
-export class VideoPlayerComponent {
+export class VideoPlayerComponent implements AfterViewInit {
 
     title = 'Adidas Video Hacking - Video playback';
 
@@ -25,6 +26,7 @@ export class VideoPlayerComponent {
     mainContent: HTMLMainElement;
     video: HTMLVideoElement;
     canvas: HTMLCanvasElement;
+    startButton: HTMLButtonElement
 
     // Frames sequencer and array of frames
     frameConv: FrameConverter;
@@ -36,23 +38,25 @@ export class VideoPlayerComponent {
     // Observable containing the API request results
     apiRequest: Observable<Object>;
 
-    constructor( private restApiService: RestApiService ) {
-        this.apiRequest = this.restApiService.getAllVariations();
+    constructor(private route: ActivatedRoute, private restApiService: RestApiService ) {
+
+        // Get URL parameters (info about the most recent variation)
+		this.route.queryParams.subscribe(params => {
+            if ( (params['id'] != undefined) && (params['path'] != undefined) ) {
+
+                // Add current frame to array of variations
+                let variation = { id: params['id'] , variationPath: params['path'] };
+                this.frameVariations[variation.id] = { jpg: variation.variationPath };
+            }
+        });
+
     }
 
 
     ngAfterViewInit() {
 
-        StaticScriptsService.loadJs('pleaserotate.min.js', true);
+        //StaticScriptsService.loadJs('pleaserotate.min.js');
 
-        this.apiRequest.subscribe( (data:Array<{ jpg:string }>) => {
-            this.frameVariations = data;
-            this.init();
-        })
-    }
-
-
-    init() {
         // This variable used to pass ourself to event call-backs
         let self:VideoPlayerComponent = this;
 
@@ -82,8 +86,6 @@ export class VideoPlayerComponent {
                 20
             );
         };
-
-        this.video.play();
 
     } // end of ngAfterViewInit()
 
