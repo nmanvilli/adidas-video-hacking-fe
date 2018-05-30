@@ -3,16 +3,13 @@
         <section class="content">
 
             <!-- Source video (hidden and used to generate the playing canvas frame by frame) -->
-            <video id="sourceVideo" width="800" height="450" preload="auto">
+            <video id="sourceVideo" width="800" height="450" preload="auto" loop="loop">
                 <source src="assets/video/predator-is-back.mp4" type="video/mp4">
             </video>
 
             <canvas id="playingCanvas"></canvas>
 
-            <div class="video-controls">
-                <button type="button" id="playPause"><i class="fa fa-play"></i></button>
-                <input type="range" id="seekBar" value="0">
-            </div>
+            <a id="startButton" href="/choose" class="animated fadeInUp">Click Here to Create</a>
 
         </section>
     </main>

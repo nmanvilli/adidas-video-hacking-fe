@@ -2,11 +2,13 @@
 	width: 100%;
 	height: 100%;
 }
+
 #main {
 	display: table;
 	width: 100%;
 	height: 100%;
 }
+
 .content {
 	display: table-cell;
     vertical-align: middle;
@@ -21,6 +23,7 @@
 
 #framesList li {
     flex: 0 1 auto;
+    padding: 0 1%;
     list-style-type: none;
 }
 

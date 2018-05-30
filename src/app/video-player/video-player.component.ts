@@ -9,7 +9,6 @@ import { StaticScriptsService } from '../services/static-scripts.service';
 
 // Load custom objects
 import { FrameConverter } from './frame-converter';
-import { VideoControls } from './video-controls';
 
 
 @Component({
@@ -44,7 +43,7 @@ export class VideoPlayerComponent {
 
     ngAfterViewInit() {
 
-        StaticScriptsService.load('pleaserotate.min.js', true);
+        StaticScriptsService.loadJs('pleaserotate.min.js', true);
 
         this.apiRequest.subscribe( (data:Array<{ jpg:string }>) => {
             this.frameVariations = data;
@@ -62,15 +61,6 @@ export class VideoPlayerComponent {
 
         // Get playing canvas from DOM
         this.canvas = <HTMLCanvasElement>document.getElementById('playingCanvas');
-
-        // Get play/pause button from DOM
-        let playButton:HTMLButtonElement = <HTMLButtonElement>document.getElementById('playPause');
-
-        // Get time slider from DOM
-        let seekBar:HTMLInputElement = <HTMLInputElement>document.getElementById('seekBar');
-
-        // Create videoControls object
-        let vidCtrl:VideoControls = new VideoControls( this.video, this.canvas, playButton, seekBar );
 
         // Create frameConverter object
         this.frameConv = new FrameConverter( this.video, this.canvas, this.frameVariations );
@@ -92,6 +82,8 @@ export class VideoPlayerComponent {
                 20
             );
         };
+
+        this.video.play();
 
     } // end of ngAfterViewInit()
 

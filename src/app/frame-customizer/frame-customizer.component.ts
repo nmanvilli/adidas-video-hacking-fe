@@ -51,7 +51,7 @@ export class FrameCustomizerComponent {
 
     ngAfterViewInit() {
 
-		StaticScriptsService.load('pleaserotate.min.js', true);
+		StaticScriptsService.loadJs('pleaserotate.min.js', true);
 
 		// This variable used to pass ourself to event call-backs
         let self:FrameCustomizerComponent = this;

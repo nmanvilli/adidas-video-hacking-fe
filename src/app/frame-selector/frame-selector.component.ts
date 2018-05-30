@@ -38,7 +38,7 @@ export class FrameSelectorComponent {
     }
 
     ngAfterViewInit() {
-        StaticScriptsService.load('pleaserotate.min.js', true);
+        StaticScriptsService.loadJs('pleaserotate.min.js', true);
     }
 
 }
