@@ -1,7 +1,8 @@
-.site-inner{
+.site-inner {
 	width: 100%;
 	height: 100%;
 }
+
 #main {
 	display: table;
 	width: 100%;
@@ -9,14 +10,13 @@
 	box-sizing: border-box;
 	padding-right: 80px;
 }
+
 .content {
 	display: table-cell;
 	vertical-align: middle;
 }
-canvas {
-	background-color: #000;
-}
-.sidebar{
+
+.sidebar {
 	position: fixed;
 	top: 0;
 	right: 0;

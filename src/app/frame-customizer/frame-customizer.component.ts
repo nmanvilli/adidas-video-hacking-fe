@@ -12,7 +12,7 @@ import { fabric } from 'fabric';
 
 // Load custom objects
 import { FrameCustomizerControls } from './frame-customizer-controls';
-import { PointerControls } from './pointer-controls';
+//import { PointerControls } from './pointer-controls';
 
 @Component({
 	selector: 'app-frame-customizer',
@@ -38,7 +38,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 
 	// Tools and color controls
 	controls: FrameCustomizerControls;
-	pointerControls: PointerControls;
+	//pointerControls: PointerControls;
 
 
     constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService) {
@@ -76,7 +76,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 		this.controls = new FrameCustomizerControls(this.drawingCanvas);
 
 		// Create pointer controls
-		this.pointerControls = new PointerControls();
+		//this.pointerControls = new PointerControls();
 
 		// Prepare canvas for drawing
 		this.drawingCanvas.isDrawingMode = true;

@@ -15,11 +15,13 @@ export class FrameCustomizerControls {
 	messyBrush: fabric.InkBrush;
     preciseBrush: fabric.SprayBrush;
     
-    color1:string = '#ff0000';
-    color2:string = '#00ff00';
-    color3:string = '#0000ff';
+    // Colors
+    color1:string = '#d0261e';
+    color2:string = '#f8f8f8';
+    color3:string = '#111111';
     currentColor: string;
 
+    // Buttons
     messyBrushButton: HTMLButtonElement; // Messy Brush button
     preciseBrushButton: HTMLButtonElement; // Precise Brush button
     color1Button: HTMLButtonElement; // Color 1 button
@@ -35,7 +37,7 @@ export class FrameCustomizerControls {
 
         // Set Messy Spray brush (from Fabric Brush addon)
 		this.messyBrush = new fabric.InkBrush(this.drawingCanvas, {
-            width: 30,
+            width: 30
 		});
 
 		// Set Precise Spray brush (from Fabric Brush addon)
@@ -70,12 +72,12 @@ export class FrameCustomizerControls {
             self.setColor(self.color1);
         });
 
-        // Event listener for the Color 1 button
+        // Event listener for the Color 2 button
         this.color2Button.addEventListener('click', function() {
             self.setColor(self.color2);
         });
 
-        // Event listener for the Color 1 button
+        // Event listener for the Color 3 button
         this.color3Button.addEventListener('click', function() {
             self.setColor(self.color3);
         });

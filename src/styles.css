@@ -1,9 +1,11 @@
 @import '~font-awesome/css/font-awesome.css';
 
 /* You can add global styles to this file, and also import other style files */
+
 html, body {
 	margin: 0;
 	height: 100%;
+    cursor: url('/assets/img/spray.gif'), crosshair;
 }
 
 body {
@@ -13,6 +15,10 @@ body {
 
 img {
 	max-width: 100%;
+}
+
+canvas {
+	background-color: #000;
 }
 
 #pleaserotate-graphic {
