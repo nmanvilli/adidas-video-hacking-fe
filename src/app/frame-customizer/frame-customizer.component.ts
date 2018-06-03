@@ -129,6 +129,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 
 		// Load frame image as Canvas background
 		fabric.Image.fromURL(this.frame['path'], function(img) {
+			console.log(self.frame['path']);
 			self.drawingCanvas.setBackgroundImage(
 				img,
 				self.drawingCanvas.renderAll.bind( self.drawingCanvas ),

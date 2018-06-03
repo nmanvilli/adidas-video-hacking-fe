@@ -19,3 +19,7 @@
 #sourceVideo {
 	display: none;
 }
+
+canvas {
+	background-color: #000;
+}
