@@ -87,6 +87,8 @@ export class VideoPlayerComponent implements AfterViewInit {
             );
         };
 
+        this.video.play();
+
     } // end of ngAfterViewInit()
 
 
