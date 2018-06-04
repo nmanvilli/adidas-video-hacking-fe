@@ -87,7 +87,9 @@ export class VideoPlayerComponent implements AfterViewInit {
             );
         };
 
-        this.video.play();
+        this.canvas.addEventListener('click', function() {
+            self.video.play();
+        });
 
     } // end of ngAfterViewInit()
 
