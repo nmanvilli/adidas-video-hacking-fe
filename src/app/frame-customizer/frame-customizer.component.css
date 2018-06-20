@@ -3,6 +3,11 @@
 	height: 100%;
 }
 
+#navbar{
+	display: none !important;
+}
+
+
 #main {
 	display: table;
 	width: 100%;
@@ -16,10 +21,100 @@
 	vertical-align: middle;
 }
 
+#drawingCanvas{
+	min-width: 100%;
+	min-height: 100%;
+}
+
 .sidebar {
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
-	width: 80px;
+	width: 100px;
+	height: 100%;
+	z-index: 1;
+	background-color: rgba(68,68,68,.4);
+}
+
+.panel{
+	position: relative;
+	height: 100%;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.panel li {
+	height: calc(100% / 7);
+	width: 100%;
+	display: table;
+}
+
+.panel li > div {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.panel li:nth-child(6) > div{
+	vertical-align: bottom;
+}
+
+button {
+	border-radius: 50%;
+	border: none;
+	width: 55px;
+	height: 55px;
+	margin: 0 25px;
+	background-color: transparent;
+	background-position: center;
+	background-size: cover;
+}
+
+
+#messyBrushButton{
+	background-image: url('/assets/img/icons/spray-one-icon.svg');
+}
+
+#preciseBrushButton{
+	background-image: url('/assets/img/icons/spray-two-icon.svg');
+}
+
+#color1Button{
+	background-image: url('/assets/img/icons/red-color-icon.svg');
+}
+
+#color2Button{
+	background-image: url('/assets/img/icons/white-color-icon.svg');
+}
+
+#color3Button{
+	background-image: url('/assets/img/icons/black-color-icon.svg');
+}
+
+#resetBtn{
+	background-image: url('/assets/img/icons/reset-icon.svg');
+}
+
+#doneBtn{
+	background-image: url('/assets/img/icons/done-icon.svg');
+}
+
+@media(max-width: 960px){
+
+	.sidebar{
+		width: 80px;
+	}
+
+	.panel li {
+		padding: 5px 0;
+		box-sizing: border-box;
+	}
+
+	button {
+		width: 40px;
+		height: 40px;
+		margin: 0 20px;
+	}
+
 }

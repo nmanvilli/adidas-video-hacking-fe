@@ -97,8 +97,12 @@ export class VideoPlayerComponent implements AfterViewInit {
     resizeCanvas() {
         // Resize canvas
         let currentWidth = this.mainContent.clientWidth;
+
+        var videoRatio = this.video.height / this.video.width;
+        this.video.setAttribute( 'width', currentWidth.toString() );
+        this.video.setAttribute( 'height', (currentWidth * videoRatio).toString() );
         this.canvas.setAttribute( 'width', currentWidth.toString() );
-        this.canvas.setAttribute( 'height', (currentWidth * this.video.height / this.video.width).toString() );
+        this.canvas.setAttribute( 'height', (currentWidth * videoRatio).toString() );
 
         // Re-render current frame
         this.frameConv.renderFrame();

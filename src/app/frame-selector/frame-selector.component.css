@@ -1,17 +1,25 @@
+@font-face{
+	font-family: 'nexa';
+	src: url('/assets/fonts/NexaBold.otf');
+	font-size: normal;
+	font-weight: 700;
+}
+
 .site-inner {
 	width: 100%;
 	height: 100%;
 }
 
+
 #main {
-    display: table;
-    margin: 0 auto;
+  display: table;
+	margin: 0 auto;
 	width: 100%;
 	height: 100%;
 }
 
 .content {
-	display: table-cell;
+		display: table-cell;
     vertical-align: middle;
     text-align: center;
 }
@@ -42,9 +50,21 @@
 }
 
 h2 {
-    
+	font-family: nexa;
+	font-weight: 700;
+	font-size: 40px;
+	margin-top: 8vh;
+	margin-bottom: 0;
 }
 
 canvas {
 	background-color: #000;
+}
+
+@media (max-width: 760px){
+
+	h2{
+		font-size: 25px;
+	}
+
 }

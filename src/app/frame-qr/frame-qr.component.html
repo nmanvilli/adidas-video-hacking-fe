@@ -1,11 +1,35 @@
-<main id="main">
-    <div class="site-inner">
+<div class="site-inner">
+    <main id="main">
+
+
         <section class="content">
 
-            <canvas id="showingCanvas" width="800" height="450"></canvas>
+          <div id="sharingContent">
 
-            <qr-code [value]="shareUrl" [size]="150"></qr-code>
+            <canvas id="showingCanvas"></canvas>
+
+            <div id="share">
+                <div>
+
+                  <ul id="socials">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+
+                  <div class="shareText">
+                      <span>thanks!</span>
+                      <p>share your creation and be part of the adidas creators community</p>
+                  </div>
+
+                </div>
+            </div>
+
+          </div>
+
+
+            <!-- <qr-code [value]="shareUrl" [size]="150"></qr-code> -->
 
         </section>
-    </div>
-</main>
+    </main>
+</div>
