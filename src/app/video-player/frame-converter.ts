@@ -1,4 +1,3 @@
-
 export class FrameConverter {
 
     fps: number = 8; // Frames per second
@@ -78,7 +77,7 @@ export class FrameConverter {
     }
 
 
-    // Compute and display the next frame 
+    // Compute and display the next frame
     renderFrame() {
 
         // Acquire a video frame from the video element
@@ -107,10 +106,10 @@ export class FrameConverter {
             0, 0,
             this.canvas.width, this.canvas.height
         );
-        
+
         // Render to canvasCtx
         this.canvasCtx.putImageData(data, 0, 0);
-        
+
         return;
     }
 
