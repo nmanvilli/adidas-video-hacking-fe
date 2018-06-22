@@ -55,6 +55,7 @@ export class VideoPlayerComponent implements AfterViewInit {
 
     ngAfterViewInit() {
 
+
         document.getElementById("scrollToHome").addEventListener("click", myFunction);
 
         function myFunction() {
@@ -63,7 +64,6 @@ export class VideoPlayerComponent implements AfterViewInit {
           document.getElementById("intro").style.transition = ".5s all";
           document.getElementById("sourceVideo").play();
         }
-
 
         //StaticScriptsService.loadJs('pleaserotate.min.js');
 
