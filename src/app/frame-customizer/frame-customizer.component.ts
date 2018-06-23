@@ -45,7 +45,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 
 		// Get URL parameters (info about the current frame)
 		this.route.queryParams.subscribe(params => {
-			this.frame = { id: params['id'] , path: params['path'] };
+			this.frame = { id: params['frame'] , path: params['path'] };
 		});
 
 	}
@@ -144,7 +144,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 	// Function to send the Canvas to the server as a JPG string
 	sendVariationToServer(jpgVariation) {
 
-		//console.log(jpgVariation);
+		console.log(this.frame.id);
 
 		this.restApiService.saveVariation(jpgVariation, this.frame.id).then(
 			data => {
@@ -177,11 +177,8 @@ export class FrameCustomizerComponent implements AfterViewInit {
 
 		// Get url of the background frame image
 		let canvasBackground = new Image();
+		canvasBackground.crossOrigin = 'anonymous';
 		canvasBackground.src = self.frame['path'];
-
-		// Get drawn overlay as PNG (background-image is not included)
-		let canvasOverlay = new Image();
-		canvasOverlay.src = this.upperCanvas.toDataURL('image/png');
 
 		canvasBackground.onload = function() {
 			// Draw background on temporary Canvas
@@ -192,6 +189,11 @@ export class FrameCustomizerComponent implements AfterViewInit {
 			);
 
 			// Draw overlay on temporary Canvas
+			// Get drawn overlay as PNG (background-image is not included)
+			let canvasOverlay = new Image();
+			canvasOverlay.crossOrigin = 'anonymous';
+			canvasOverlay.src = self.upperCanvas.toDataURL('image/png');
+
 			canvasOverlay.onload = function() {
 				newFrameCtx.drawImage(
 					canvasOverlay,

@@ -20,8 +20,8 @@
         <section class="content">
 
             <!-- Source video (hidden and used to generate the playing canvas frame by frame) -->
-            <video id="sourceVideo" width="1920" height="1080" preload="auto" loop="loop">
-                <source src="/assets/video/predator-is-back.mp4" type="video/mp4">
+            <video id="sourceVideo" width="1920" height="1080" preload="auto" loop="loop" crossorigin="anonymous">
+                <source src="{{baseUrl}}vid/video.mp4" type="video/mp4">
             </video>
 
             <canvas id="playingCanvas"></canvas>

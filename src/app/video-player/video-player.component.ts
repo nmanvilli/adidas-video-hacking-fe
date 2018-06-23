@@ -22,6 +22,9 @@ export class VideoPlayerComponent implements AfterViewInit {
 
     title = 'Adidas Video Hacking - Video playback';
 
+    // Base server URL
+    baseUrl: string;
+
     // DOM elements
     mainContent: HTMLMainElement;
     video: HTMLVideoElement;
@@ -40,6 +43,8 @@ export class VideoPlayerComponent implements AfterViewInit {
 
     constructor(private route: ActivatedRoute, private restApiService: RestApiService ) {
 
+        this.baseUrl = restApiService.getBaseUrl();
+
         // Get URL parameters (info about the most recent variation)
 		this.route.queryParams.subscribe(params => {
             if ( (params['id'] != undefined) && (params['path'] != undefined) ) {
@@ -54,16 +59,6 @@ export class VideoPlayerComponent implements AfterViewInit {
 
 
     ngAfterViewInit() {
-
-
-        document.getElementById("scrollToHome").addEventListener("click", myFunction);
-
-        function myFunction() {
-          console.log("click");
-          document.getElementById("intro").style.top = "-200%";
-          document.getElementById("intro").style.transition = ".5s all";
-          document.getElementById("sourceVideo").play();
-        }
 
         //StaticScriptsService.loadJs('pleaserotate.min.js');
 
@@ -84,6 +79,15 @@ export class VideoPlayerComponent implements AfterViewInit {
 
         // Set main content maximum width depending on video size
         this.mainContent.style.maxWidth = this.video.width.toString() + 'px';
+
+
+        document.getElementById("scrollToHome").addEventListener("click", function() {
+            console.log("click");
+            let intro = document.getElementById("intro");
+            intro.style.top = "-200%";
+            intro.style.transition = ".5s all";
+            self.video.play();
+        });
 
         // Make canvas responsive (using a resize timer to avoid viewport size inconsistencies)
         this.resizeTimer = window.setTimeout(
