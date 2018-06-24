@@ -1,22 +1,38 @@
-<main id="main">
-    <div class="site-inner">
-      
-        <header id="navbar">
-          <a href="#" id="logo">
-            <img src="/assets/img/AdidasVideoHacking_black.svg" alt="">
-          </a>
-          <nav id="menu">
-            <ul>
-              <li class="legal"> © 2018 adidas </li>
-              <li class="about"><a href="#">About</a></li>
-            </ul>
-          </nav>
-        </header>
+<app-menu-bar></app-menu-bar>
+
+<div class="site-inner">
+    <main id="main">
 
         <section class="content">
 
-            <canvas id="showingCanvas" width="800" height="450"></canvas>
+            <div id="sharingContent">
+
+                <div class="canvas-container">
+                    <canvas id="showingCanvas"></canvas>
+                </div>
+
+                <div id="share">
+                    <div>
+
+                        <ul id="socials">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+
+                        <div class="shareText">
+                            <span>thanks!</span>
+                            <p>share your creation and be part of the adidas creators community</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- <qr-code [value]="shareUrl" [size]="150"></qr-code> -->
 
         </section>
-    </div>
-</main>
+    </main>
+</div>

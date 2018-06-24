@@ -9,7 +9,6 @@ import { fabric } from 'fabric';
 
 // Load custom objects
 import { FrameCustomizerControls } from './frame-customizer-controls';
-//import { PointerControls } from './pointer-controls';
 
 @Component({
 	selector: 'app-frame-customizer',
@@ -39,7 +38,6 @@ export class FrameCustomizerComponent implements AfterViewInit {
 
 	// Tools and color controls
 	controls: FrameCustomizerControls;
-	//pointerControls: PointerControls;
 
 	// Timer used by the resize event
     resizeTimer: number;
@@ -80,9 +78,6 @@ export class FrameCustomizerComponent implements AfterViewInit {
 
 		// Create drawing controls
 		this.controls = new FrameCustomizerControls(this.drawingCanvas);
-
-		// Create pointer controls
-		//this.pointerControls = new PointerControls();
 
 		// Prepare canvas for drawing
 		this.drawingCanvas.isDrawingMode = true;

@@ -17,6 +17,8 @@ import { FrameCustomizerComponent } from './frame-customizer/frame-customizer.co
 import { FrameQRComponent } from './frame-qr/frame-qr.component';
 import { FrameSharingComponent } from './frame-sharing/frame-sharing.component';
 
+import { MenuBarComponent } from './menu-bar/menu-bar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import { FrameSharingComponent } from './frame-sharing/frame-sharing.component';
     FrameSelectorComponent,
     FrameCustomizerComponent,
     FrameQRComponent,
-    FrameSharingComponent
+    FrameSharingComponent,
+    MenuBarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MenuBarComponent } from '../menu-bar/menu-bar.component';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
@@ -16,6 +17,9 @@ import { FrameConverter } from './frame-converter';
     providers: [ RestApiService ]
 })
 export class VideoPlayerComponent implements AfterViewInit {
+
+    @ViewChild(MenuBarComponent) menu: MenuBarComponent;
+
 
     title = 'Adidas Video Hacking - Video playback';
 

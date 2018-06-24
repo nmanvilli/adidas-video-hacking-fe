@@ -1,5 +1,6 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuBarComponent } from '../menu-bar/menu-bar.component';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
@@ -16,6 +17,8 @@ import { FrameThumbnail } from './frame-thumbnail';
     providers: [ RestApiService ]
 })
 export class FrameSelectorComponent implements AfterViewInit {
+
+    @ViewChild(MenuBarComponent) menu: MenuBarComponent;
 
     title = 'Choose the frame to customize!';
 
