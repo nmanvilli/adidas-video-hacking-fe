@@ -19,11 +19,11 @@
 .content {
 	display: table-cell;
 	vertical-align: middle;
+	overflow: hidden;
 }
 
 #drawingCanvas{
-	min-width: 100%;
-	min-height: 100%;
+	position: relative;
 }
 
 .sidebar {

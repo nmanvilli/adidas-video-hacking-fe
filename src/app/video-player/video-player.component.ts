@@ -5,9 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { RestApiService } from '../services/rest-api.service';
 import { Observable } from 'rxjs';
 
-// Static JS loader service
-import { StaticScriptsService } from '../services/static-scripts.service';
-
 // Load custom objects
 import { FrameConverter } from './frame-converter';
 
@@ -60,8 +57,6 @@ export class VideoPlayerComponent implements AfterViewInit {
 
     ngAfterViewInit() {
 
-        //StaticScriptsService.loadJs('pleaserotate.min.js');
-
         // This variable used to pass ourself to event call-backs
         let self:VideoPlayerComponent = this;
 
@@ -80,12 +75,10 @@ export class VideoPlayerComponent implements AfterViewInit {
         // Set main content maximum width depending on video size
         this.mainContent.style.maxWidth = this.video.width.toString() + 'px';
 
-
-        document.getElementById("scrollToHome").addEventListener("click", function() {
-            console.log("click");
-            let intro = document.getElementById("intro");
-            intro.style.top = "-200%";
-            intro.style.transition = ".5s all";
+        document.getElementById('scrollToHome').addEventListener('click', function() {
+            let intro = document.getElementById('intro');
+            intro.style.top = '-200%';
+            intro.style.transition = '.5s all';
             self.video.play();
         });
 
@@ -100,10 +93,7 @@ export class VideoPlayerComponent implements AfterViewInit {
                 20
             );
         };
-
-        this.canvas.addEventListener('click', function() {
-            self.video.play();
-        });
+        this.resizeCanvas();
 
     } // end of ngAfterViewInit()
 
@@ -111,12 +101,29 @@ export class VideoPlayerComponent implements AfterViewInit {
     resizeCanvas() {
         // Resize canvas
         let currentWidth = this.mainContent.clientWidth;
+        let currentHeight = this.mainContent.clientHeight;
 
-        var videoRatio = this.video.height / this.video.width;
-        this.video.setAttribute( 'width', currentWidth.toString() );
-        this.video.setAttribute( 'height', (currentWidth * videoRatio).toString() );
-        this.canvas.setAttribute( 'width', currentWidth.toString() );
-        this.canvas.setAttribute( 'height', (currentWidth * videoRatio).toString() );
+        let currentRatio = currentWidth / currentHeight;
+        let videoRatio = this.video.width / this.video.height;
+
+        let newVideoWidth;
+        let newVideoHeight;
+        if (videoRatio > currentRatio) {
+            newVideoHeight = currentHeight;
+            newVideoWidth = newVideoHeight * videoRatio;
+            this.canvas.style.top = '0';
+            this.canvas.style.left = (-(newVideoWidth - currentWidth) / 2).toString() + 'px';
+        }
+        else {
+            newVideoWidth = currentWidth;
+            newVideoHeight = newVideoWidth / videoRatio;
+            this.canvas.style.top = (-(newVideoHeight - currentHeight) / 2).toString() + 'px';
+            this.canvas.style.left = '0';
+        }
+        this.video.setAttribute( 'width', newVideoWidth.toString()+'px' );
+        this.video.setAttribute( 'height', newVideoHeight.toString()+'px' );
+        this.canvas.setAttribute( 'width', newVideoWidth.toString()+'px' );
+        this.canvas.setAttribute( 'height', newVideoHeight.toString()+'px' );
 
         // Re-render current frame
         this.frameConv.renderFrame();

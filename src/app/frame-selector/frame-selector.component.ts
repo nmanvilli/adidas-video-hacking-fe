@@ -5,9 +5,6 @@ import { Router } from '@angular/router';
 import { RestApiService } from '../services/rest-api.service';
 import { Observable } from 'rxjs';
 
-// Static JS loader service
-import { StaticScriptsService } from '../services/static-scripts.service';
-
 // Load Template Models
 import { FrameThumbnail } from './frame-thumbnail';
 
@@ -39,7 +36,6 @@ export class FrameSelectorComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        //StaticScriptsService.loadJs('pleaserotate.min.js');
     }
 
 }

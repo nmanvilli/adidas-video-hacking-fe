@@ -5,7 +5,7 @@
 html, body {
 	margin: 0;
 	height: 100%;
-    cursor: url('/assets/img/spray.gif'), crosshair;
+    /*cursor: url('/assets/img/spray.gif'), crosshair;*/
 }
 
 body {
@@ -17,22 +17,12 @@ img {
 	max-width: 100%;
 }
 
-#pleaserotate-graphic {
-    fill: #fff;
-}
-
-#pleaserotate-backdrop {
-    color: #fff;
-    background-color: #111;
-}
-
 .animated {
 	-webkit-animation-duration: 1s;
 	animation-duration: 1s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
-
 @-webkit-keyframes fadeInUp {
 	from {
 		opacity: 0;
@@ -58,12 +48,10 @@ img {
 		transform: translate3d(0, 0, 0);
 	}
 }
-
 .fadeInUp {
 	-webkit-animation-name: fadeInUp;
 	animation-name: fadeInUp;
 }
-
 @-webkit-keyframes fadeOutUp {
 	from {
 		opacity: 1;
@@ -74,7 +62,6 @@ img {
 		transform: translate3d(0, -100%, 0);
 	}
 }
-
 @keyframes fadeOutUp {
 	from {
 		opacity: 1;
@@ -85,13 +72,10 @@ img {
 		transform: translate3d(0, -100%, 0);
 	}
 }
-
 .fadeOutUp {
 	-webkit-animation-name: fadeOutUp;
 	animation-name: fadeOutUp;
 }
-
-
 @-webkit-keyframes slideInUp {
 	from {
 		-webkit-transform: translate3d(0, 10%, 0);
@@ -103,7 +87,6 @@ img {
 		transform: translate3d(0, 0, 0);
 	}
 }
-
 @keyframes slideInUp {
 	from {
 		-webkit-transform: translate3d(0, 10%, 0);
@@ -115,7 +98,6 @@ img {
 		transform: translate3d(0, 0, 0);
 	}
 }
-
 .slideInUp {
 	-webkit-animation-name: slideInUp;
 	animation-name: slideInUp;

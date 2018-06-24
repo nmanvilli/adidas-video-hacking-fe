@@ -4,9 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
 
-// Static JS loader service
-import { StaticScriptsService } from '../services/static-scripts.service';
-
 @Component({
 	selector: 'app-frame-qr',
     templateUrl: './frame-qr.component.html',
@@ -37,8 +34,6 @@ export class FrameQRComponent {
 
 
     ngAfterViewInit() {
-		
-		//StaticScriptsService.loadJs('pleaserotate.min.js');
 
 		// This variable used to pass ourself to event call-backs
         let self:FrameQRComponent = this;
