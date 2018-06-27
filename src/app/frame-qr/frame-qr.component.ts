@@ -53,7 +53,7 @@ export class FrameQRComponent implements AfterViewInit {
 		let newCanvasWidth = this.canvas.clientWidth;
 
 		this.canvas.setAttribute( 'width', newCanvasWidth + 'px' );
-		this.canvas.setAttribute( 'height', (newCanvasWidth * 1080 / 1920) + 'px' );
+		this.canvas.setAttribute( 'height', (newCanvasWidth * 817 / 1920) + 'px' );
     }
 
 

@@ -174,7 +174,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 		// Temporary Canvas that will hold the reassembled variation
 		let newFrame = document.createElement('canvas');
 		newFrame.width = 1920;
-		newFrame.height = 1080;
+		newFrame.height = 817;
 		let newFrameCtx = newFrame.getContext('2d');
 
 		// Get url of the background frame image
@@ -187,7 +187,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 			newFrameCtx.drawImage(
 				canvasBackground,
 				0, 0,
-				1920, 1080
+				1920, 817
 			);
 
 			// Draw overlay on temporary Canvas
@@ -200,7 +200,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 				newFrameCtx.drawImage(
 					canvasOverlay,
 					0, 0,
-					1920, 1080
+					1920, 817
 				);
 
 				// Export temporary Canvas as JPG and send it to the server
@@ -220,7 +220,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 		let currentHeight = this.mainContent.clientHeight;
 
         let currentRatio = currentWidth / currentHeight;
-        let canvasRatio = 1920 / 1080;
+        let canvasRatio = 1920 / 817;
 
         let newCanvasWidth;
         let newCanvasHeight;
