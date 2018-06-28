@@ -1,5 +1,14 @@
 @import '~font-awesome/css/font-awesome.css';
 
+@font-face {
+    font-family: 'thirdRail';
+    src: url('/assets/fonts/thirdrail-webfont.woff2') format('woff2'),
+         url('/assets/fonts/thirdrail-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body {

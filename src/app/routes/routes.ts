@@ -4,6 +4,7 @@ import { FrameSelectorComponent } from '../frame-selector/frame-selector.compone
 import { FrameCustomizerComponent } from '../frame-customizer/frame-customizer.component';
 import { FrameQRComponent } from '../frame-qr/frame-qr.component';
 import { FrameSharingComponent } from '../frame-sharing/frame-sharing.component';
+import { AboutComponent } from '../about/about.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -11,5 +12,6 @@ export const routes: Routes = [
     { path: 'choose', component: FrameSelectorComponent },
     { path: 'edit', component: FrameCustomizerComponent },
     { path: 'share-from-store', component: FrameQRComponent },
-    { path: 'share', component: FrameSharingComponent }
+    { path: 'share', component: FrameSharingComponent },
+    { path: 'about', component: AboutComponent}
 ];

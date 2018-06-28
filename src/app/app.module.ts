@@ -16,6 +16,7 @@ import { FrameSelectorComponent } from './frame-selector/frame-selector.componen
 import { FrameCustomizerComponent } from './frame-customizer/frame-customizer.component';
 import { FrameQRComponent } from './frame-qr/frame-qr.component';
 import { FrameSharingComponent } from './frame-sharing/frame-sharing.component';
+import { AboutComponent } from './about/about.component';
 
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 
@@ -27,6 +28,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
     FrameCustomizerComponent,
     FrameQRComponent,
     FrameSharingComponent,
+    AboutComponent,
     MenuBarComponent
   ],
   imports: [

@@ -1,0 +1,544 @@
+html,body{
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	 text-decoration: none;
+	 color:white;
+}
+
+#main{
+	user-select: none;
+	overflow-x: hidden;
+	width: 100%;
+	height: 100%;
+	font-weight: 200;
+	font-size: 20px;
+	font-family: nexa;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/* INTRO BANNER */
+
+#banner{
+	width: 100%;
+	height: 100%;
+	background-image: url("/assets/img/about-img//intro-bg.jpg");
+	background-position: center;
+	background-size: cover;
+	position: relative;
+}
+
+#banner::after{
+	content: "";
+	position: absolute;
+	bottom: -65px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 400px;
+	height: 130px;
+	background-image: url("/assets/img/about-img//SVG/sprayOne.svg");
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	z-index: 999;
+}
+
+#logo{
+	width: 150px;
+	padding: 50px 0;
+	margin: auto;
+	box-sizing: border-box;
+}
+
+h1 {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+	font-size: 60px !important;
+	font-family: thirdRail !important;
+	font-style: normal;
+	color: #111;
+}
+
+h1 > .title-color-one{
+	color:#ffffff;
+}
+h1 > .title-color-two{
+	color:#d0261e;
+}
+
+/* WHAT IS ADIDAS VIDEO HACKING */
+
+#what{
+	width: 100%;
+	background-image: url("/assets/img/about-img//about-bg.jpg");
+	background-position: center;
+	background-size: cover;
+	position: relative;
+}
+
+#what::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #ffffff;
+	opacity: .8;
+}
+
+.container{
+	min-height: 500px;
+	display: table;
+	position: relative;
+}
+
+#what > .container > p {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	padding: 0 50px;
+	font-weight: 700;
+	color: #111;
+}
+
+/* HOW DOES IT WORK */
+
+#how{
+	width: 100%;
+	background: #d0261e;
+	box-sizing: border-box;
+	padding: 100px 50px;
+	text-align: center;
+	margin: auto;
+	color: #f8f8f8;
+	background-image: url("/assets/img/about-img//SVG/pattern.svg");
+	background-position: center;
+	background-size: contain;
+}
+
+h2 {
+		font-size: 50px !important;
+		margin-bottom: 50px !important;
+		font-family: thirdRail !important;
+}
+
+.box-container{
+	width: 100%;
+	height: auto;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-top: 50px;
+	position: relative;
+	z-index: 998;
+}
+
+.box-container > li {
+		display: table;
+		width: 100%;
+		margin-top: 50px;
+		z-index: 998;
+		position: relative;
+		height: 400px;
+}
+
+.box{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	width: 100%;
+	border: 5px solid #f8f8f8;
+	z-index: 998;
+	position: relative;
+}
+
+.box::before{
+	content: "";
+	position: absolute;
+	top: -20%;
+	left: 30px;
+	width: 100%;
+	height: 150%;
+	background-image: url("/assets/img/about-img//SVG/howSpray.svg");
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	opacity: .5;
+	z-index: -1;
+}
+
+.spray-icon{
+	width: 60px;
+	height: 60px;
+	margin: auto;
+	background-image: url("/assets/img/about-img//click-here.svg");
+	background-position: center;
+	background-size: contain;
+	background-color: #111;
+	border-radius: 50%;
+}
+
+.box > h3 {
+	margin-top: 30px;
+	font-weight: 200;
+}
+
+.box > h3 > a >span {
+	font-size: 35px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+/* STORE EXPERIENCE */
+
+#store{
+	width: 100%;
+	background: #111;
+	text-align: center;
+	margin: auto;
+	color: #f8f8f8;
+	position: relative;
+	padding-bottom: 150px;
+}
+
+.full-width-spray{
+	box-sizing: border-box;
+	padding: 100px 50px;
+	width: 100%;
+	height: 100%;
+	background-image: url("/assets/img/about-img//SVG/storeSpray.svg");
+	background-position: center right;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+#map{
+	width: 100%;
+	height: 300px;
+	margin: 70px 0;
+	background: white;
+	background-image: url("/assets/img/about-img//map.png");
+	background-position: center;
+	background-size: cover;
+}
+
+.store-location{
+	width: 100%;
+	height: auto;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	margin-bottom: 100px;
+}
+
+.city{
+	width: 200px;
+	height: 140px;
+	margin: auto;
+	color: #111;
+	margin-bottom: 40px;
+	font-family: nexa;
+	font-weight: 800;
+	font-size: 23px;
+	text-transform: uppercase;
+	position: relative;
+	padding-top: 30px;
+	line-height: 25px;
+	transform: rotate(-5deg);
+}
+
+.city::before{
+	content: "";
+	position: absolute;
+	height: 150%;
+	width: 150%;
+	top: -80px;
+	left: -50px;
+	background-image: url("/assets/img/about-img//SVG/citySprayOne.svg");
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	z-index: -1;
+}
+
+.city:nth-child(2n)::before{
+	top: -65px;
+	left: -40px;
+	background-image: url("/assets/img/about-img//SVG/citySprayTwo.svg");
+}
+
+.city > .red {
+	color: #d0261e;
+	font-size: 25px;
+}
+
+.city > .small{
+	font-weight: 700;
+	font-size: 9px;
+	position: relative;
+}
+
+.small::before{
+	content: "HERE";
+	position: absolute;
+	top: -15px;
+	left: -15px;
+	font-size: 10px;
+	color: #111
+}
+
+#promotional-video{
+	position: absolute;
+	bottom: -220px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 300px;
+	height: 168.75px;
+}
+
+video{
+	width: 300px;
+	height: 168.75px;
+}
+
+#promotional-video::before{
+	content: "";
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 200%;
+	height: 190%;
+	position: absolute;
+	background-image: url("/assets/img/about-img//SVG/videoSpray.svg");
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	z-index: -1;
+}
+
+footer{
+	box-sizing: border-box;
+	background-color: #f8f8f8;
+	width: 100%;
+	height: auto;
+	margin: auto;
+	padding: 0 50px;
+}
+
+#menu{
+		width: 280px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		padding-top: 300px;
+		display: flex;
+		margin: 0  auto;
+		padding-bottom: 50px;
+}
+
+.menu-item{
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-left: 15px;
+	color: gray;
+}
+
+.menu-item:nth-child(1){
+	margin-left: 0;
+}
+
+
+@media (min-width: 576px){
+
+	.container {
+    max-width: 540px;
+}
+
+	.store-location{
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 200px;
+	}
+
+	.city{
+		flex-grow: 1;
+		width: 48%;
+		margin-right: 2%;
+		margin-top: 80px;
+	}
+
+	.city:nth-child(2n){
+		margin-right: 0;
+	}
+
+	.city::before{
+		content: "";
+		position: absolute;
+		height: 150%;
+		width: 100%;
+		top: -60px;
+		left: 0;
+		background-image: url("/assets/img/about-img//SVG/citySprayOne.svg");
+		background-position: center;
+		background-size: contain;
+		background-repeat: no-repeat;
+		z-index: -1;
+	}
+
+	.city:nth-child(2n)::before{
+		height: 120%;
+		width: 100%;
+		top: -30px;
+		left: 25px;
+		background-image: url("/assets/img/about-img//SVG/citySprayTwo.svg");
+	}
+
+	#promotional-video{
+		position: absolute;
+		bottom: -220px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 450px;
+		height: 253px;
+	}
+
+	video{
+		width: 450px;
+		height: 253px;
+	}
+
+
+}
+
+@media (min-width: 768px){
+
+	.container {
+	    max-width: 720px;
+	}
+}
+
+
+@media (min-width: 992px){
+
+	.container {
+	    max-width: 960px;
+	}
+
+	h1 {
+		font-size: 70px !important;
+	}
+
+	.container > p {
+		max-width: 600px;
+		margin: auto;
+	}
+
+	.box-container{
+		display: flex;
+	}
+
+	.box-container::before{
+		content: "";
+		position: absolute;
+		top: -40px;
+		left: 50px;
+		width: 100%;
+		height: 120%;
+		background-image: url("/assets/img/about-img//SVG/howSpray.svg");
+		background-position: center;
+		background-size: contain;
+		background-repeat: no-repeat;
+		opacity: .5;
+		z-index: 997;
+	}
+
+
+	.box-container > li {
+			margin: 30px;
+			margin-top: 50px;
+	}
+
+	.box::before{
+		display: none;
+	}
+
+	#map{
+		height: 450px;
+	}
+
+	.store-location{
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 200px;
+	}
+
+	.city{
+		flex-grow: 1;
+		width: 30%;
+		margin-right: 3%;
+		margin-top: 100px;
+	}
+
+	.city:nth-child(2n){
+		margin-right: 3%;
+	}
+
+	.city:nth-child(3n){
+		margin-right: 0;
+	}
+
+	.city::before{
+		top: -80px;
+	}
+
+	.city:nth-child(2n):before{
+		top: -40px;
+	}
+
+	#promotional-video{
+		position: absolute;
+		bottom: -300px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 600px;
+		height:  338px;
+	}
+
+	video{
+		width: 600px;
+		height: 338px;
+	}
+
+	#menu{
+		width:  350px;
+		padding-top: 400px;
+	}
+
+	.menu-item{
+		font-size: 13px;
+	}
+
+}
+
+@media (min-width: 1200px){
+	.container {
+	    max-width: 1140px;
+	}
+}
