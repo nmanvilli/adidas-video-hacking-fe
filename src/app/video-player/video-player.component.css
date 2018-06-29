@@ -25,6 +25,7 @@
 	top: -100%;
 	font-family: nexa;
 	font-weight: 700;
+	user-select: none;
 }
 
 .logo-intro,.text-intro{

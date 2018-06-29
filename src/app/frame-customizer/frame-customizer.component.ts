@@ -83,7 +83,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 		this.drawingCanvas.isDrawingMode = true;
 
 		// Drawing complete button
-        this.doneButton.addEventListener('click', function() {
+        this.doneButton.addEventListener('mousedown', function() {
 
 			/* IMPORTANT NOTE:
 			 *
@@ -101,9 +101,9 @@ export class FrameCustomizerComponent implements AfterViewInit {
 			self.mergeUpperCanvasThenSend();
 
 		});
-		
+
 		// Drawing clear button
-		this.resetButton.addEventListener('click', function() {
+		this.resetButton.addEventListener('mousedown', function() {
 
 			// Clear canvas
 			self.drawingCanvas.clear();
@@ -123,7 +123,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 	} // end of ngAfterViewInit()
 
 
-	
+
 	drawBackground() {
 
 		// This variable used to pass ourself to event call-backs

@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MenuBarComponent } from '../menu-bar/menu-bar.component';
 
 // Load Server API handler
@@ -42,7 +42,7 @@ export class VideoPlayerComponent implements AfterViewInit {
     // Observable containing the API request results
     apiRequest: Observable<Object>;
 
-    constructor(private route: ActivatedRoute, private restApiService: RestApiService ) {
+    constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService ) {
 
         this.baseUrl = restApiService.getBaseUrl();
 
@@ -76,15 +76,26 @@ export class VideoPlayerComponent implements AfterViewInit {
         // Get main content wrapper from DOM
         this.mainContent = <HTMLMainElement>document.getElementById('main');
 
+        this.startButton = <HTMLButtonElement>document.getElementById("startButton");
+
         // Set main content maximum width depending on video size
         this.mainContent.style.maxWidth = this.video.width.toString() + 'px';
 
-        document.getElementById('scrollToHome').addEventListener('click', function() {
+        document.getElementById('scrollToHome').addEventListener('mousedown', function() {
             let intro = document.getElementById('intro');
             intro.style.top = '-200%';
             intro.style.transition = '.5s all';
             self.video.play();
         });
+
+      this.startButton.addEventListener('mousedown', function(){
+
+        self.router.navigate( ['/choose']);
+
+      });
+
+
+
 
         // Make canvas responsive (using a resize timer to avoid viewport size inconsistencies)
         this.resizeTimer = window.setTimeout(

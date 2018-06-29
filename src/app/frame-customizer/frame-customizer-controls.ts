@@ -14,7 +14,7 @@ export class FrameCustomizerControls {
     // Brushes
 	messyBrush: fabric.InkBrush;
     preciseBrush: fabric.SprayBrush;
-    
+
     // Colors
     color1:string = '#d0261e';
     color2:string = '#f8f8f8';
@@ -58,27 +58,27 @@ export class FrameCustomizerControls {
 
 
         // Event listener for the Messy Brush button
-        this.messyBrushButton.addEventListener('click', function() {
+        this.messyBrushButton.addEventListener('mousedown', function() {
             self.setBrush(self.messyBrush);
         });
 
         // Event listener for the Precise Brush button
-        this.preciseBrushButton.addEventListener('click', function() {
+        this.preciseBrushButton.addEventListener('mousedown', function() {
             self.setBrush(self.preciseBrush);
         });
 
         // Event listener for the Color 1 button
-        this.color1Button.addEventListener('click', function() {
+        this.color1Button.addEventListener('mousedown', function() {
             self.setColor(self.color1);
         });
 
         // Event listener for the Color 2 button
-        this.color2Button.addEventListener('click', function() {
+        this.color2Button.addEventListener('mousedown', function() {
             self.setColor(self.color2);
         });
 
         // Event listener for the Color 3 button
-        this.color3Button.addEventListener('click', function() {
+        this.color3Button.addEventListener('mousedown', function() {
             self.setColor(self.color3);
         });
 

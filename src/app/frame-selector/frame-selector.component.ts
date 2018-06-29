@@ -36,6 +36,9 @@ export class FrameSelectorComponent implements AfterViewInit {
                 }
             });
 
+
+
+
     }
 
     ngAfterViewInit() {

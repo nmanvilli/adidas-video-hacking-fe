@@ -6,8 +6,8 @@
 
             <ul id="framesList">
                 <li *ngFor="let frameThumb of frameThumbs" class="animated fadeInUp">
-                    <a [routerLink]="['/edit']" [queryParams]="{frame: frameThumb.id, path:frameThumb.path }">
-                        <img src="{{ frameThumb.path }}" class="animated slideInUp">
+                    <a [routerLink]="['/edit']" [queryParams]="{frame: frameThumb.id, path:frameThumb.path }" draggable="false">
+                        <img src="{{ frameThumb.path }}" class="animated slideInUp" draggable="false">
                     </a>
                 </li>
             </ul>
