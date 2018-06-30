@@ -1,8 +1,15 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
+
+// Load Menu Bar
+import { MenuBarComponent } from '../menu-bar/menu-bar.component';
+
+// Load custom objects
+import { FrameConverter } from '../services/frame-converter.service';
+import { VideoControls } from './video-controls';
 
 @Component({
 	selector: 'app-frame-qr',
@@ -12,23 +19,50 @@ import { RestApiService } from '../services/rest-api.service';
 })
 export class FrameQRComponent implements AfterViewInit {
 
+	// HTML title
 	title = 'Share the frame!';
+
+	// Add Menu Bar
+	@ViewChild(MenuBarComponent) menu: MenuBarComponent;
+
+	// Base server URL
+	baseUrl: string;
 
 	// URL for the QR code
 	shareUrl: string;
-
-	// Object representing the current frame
-	frame: { id: string, path: string, variationPath: string };
 
 	// Get canvas from DOM
 	canvas: HTMLCanvasElement;
 	canvasCtx: CanvasRenderingContext2D;
 
+	// Video DOM elements
+	video: HTMLVideoElement;
+	playVideoCanvas: HTMLCanvasElement;
+
+	// Video controls controller and DOM elements
+	videoControls: VideoControls;
+	seekbar: HTMLInputElement;
+	mark: HTMLElement;
+
+	// Frames sequencer and array of frames
+	frameConv: FrameConverter;
+
+	// Object representing the last modified frame
+	frame: { id: string, numericId: number, path: string, variationPath: string };
 
     constructor(private route: ActivatedRoute, private restApiService: RestApiService) {
+
+		// Get API base URL
+		this.baseUrl = restApiService.getBaseUrl();
+
 		// Get URL parameters (info about the current frame and variation)
 		this.route.queryParams.subscribe(params => {
-			this.frame = { id: params['id'], path: params['path'], variationPath: params['variationPath'] };
+			this.frame = {
+				id: params['id'],
+				numericId: parseInt( params['id'].replace('frame', '') ),
+				path: params['path'],
+				variationPath: params['variationPath']
+			};
 			this.shareUrl = 'http://nmanvilli.com/';
 		});
 	}
@@ -43,9 +77,22 @@ export class FrameQRComponent implements AfterViewInit {
 		this.canvas = <HTMLCanvasElement>document.getElementById('showingCanvas');
 		this.canvasCtx = this.canvas.getContext('2d');
 
+		// Get HTML5 video from DOM (note: the video MUST have explicit width and height attributes)
+        this.video = <HTMLVideoElement>document.getElementById('sourceVideo');
+
+        // Get playing canvas from DOM
+        this.playVideoCanvas = <HTMLCanvasElement>document.getElementById('playingCanvas');
+
 		this.resizeCanvas();
 		this.drawVariation();
-		console.log(this.frame['variationPath']);
+
+        // Create frameConverter object
+        this.frameConv = new FrameConverter( this.video, this.playVideoCanvas, this.frame );
+
+		// Get video controls from DOM and start the controller
+		this.seekbar = <HTMLInputElement>document.getElementById('seekBar');
+		this.mark = <HTMLElement>document.getElementById("mark");
+		this.videoControls = new VideoControls( this.video, this.playVideoCanvas, this.seekbar, this.mark, this.frame.numericId );
 
 	} // end of ngAfterViewInit()
 
@@ -54,6 +101,11 @@ export class FrameQRComponent implements AfterViewInit {
 
 		this.canvas.setAttribute( 'width', newCanvasWidth + 'px' );
 		this.canvas.setAttribute( 'height', (newCanvasWidth * 817 / 1920) + 'px' );
+
+		this.video.setAttribute( 'width', newCanvasWidth + 'px' );
+		this.video.setAttribute( 'height', (newCanvasWidth * 817 / 1920) + 'px' );
+		this.playVideoCanvas.setAttribute( 'width', newCanvasWidth + 'px' );
+		this.playVideoCanvas.setAttribute( 'height', (newCanvasWidth * 817 / 1920) + 'px' );
     }
 
 

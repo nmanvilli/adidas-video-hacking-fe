@@ -1,14 +1,15 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MenuBarComponent } from '../menu-bar/menu-bar.component';
+import { Observable } from 'rxjs';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
-import { Observable } from 'rxjs';
 
 // Load custom objects
-import { FrameConverter } from './frame-converter';
+import { FrameConverter } from '../services/frame-converter.service';
 
+// Load Menu Bar
+import { MenuBarComponent } from '../menu-bar/menu-bar.component';
 
 @Component({
     selector: 'app-video-player',
@@ -18,10 +19,10 @@ import { FrameConverter } from './frame-converter';
 })
 export class VideoPlayerComponent implements AfterViewInit {
 
+    // Add Menu Bar
     @ViewChild(MenuBarComponent) menu: MenuBarComponent;
 
-
-    title = 'Adidas Video Hacking - Video playback';
+    title = 'Adidas Video Hacking';
 
     // Base server URL
     baseUrl: string;
@@ -30,11 +31,12 @@ export class VideoPlayerComponent implements AfterViewInit {
     mainContent: HTMLMainElement;
     video: HTMLVideoElement;
     canvas: HTMLCanvasElement;
-    startButton: HTMLButtonElement
 
     // Frames sequencer and array of frames
     frameConv: FrameConverter;
-    frameVariations: Array<{ jpg: string }> = [];
+    
+    // Object representing the last modified frame
+	frame: { id: string, numericId: number, path: string, variationPath: string };
 
     // Timer used by the resize event
     resizeTimer: number;
@@ -44,15 +46,18 @@ export class VideoPlayerComponent implements AfterViewInit {
 
     constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService ) {
 
+        // Get API base URL
         this.baseUrl = restApiService.getBaseUrl();
 
         // Get URL parameters (info about the most recent variation)
 		this.route.queryParams.subscribe(params => {
             if ( (params['id'] != undefined) && (params['path'] != undefined) ) {
-
-                // Add current frame to array of variations
-                let variation = { id: params['id'] , variationPath: params['path'] };
-                this.frameVariations[variation.id] = { jpg: variation.variationPath };
+                this.frame = {
+                    id: params['id'],
+                    numericId: parseInt( params['id'].replace('frame', '') ),
+                    path: params['path'],
+                    variationPath: params['variationPath']
+                };
             }
         });
 
@@ -71,16 +76,20 @@ export class VideoPlayerComponent implements AfterViewInit {
         this.canvas = <HTMLCanvasElement>document.getElementById('playingCanvas');
 
         // Create frameConverter object
-        this.frameConv = new FrameConverter( this.video, this.canvas, this.frameVariations );
+        if (this.frame != undefined) {
+            this.frameConv = new FrameConverter( this.video, this.canvas, this.frame );
+        }
+        else {
+            this.frameConv = new FrameConverter( this.video, this.canvas  );
+        }
 
         // Get main content wrapper from DOM
         this.mainContent = <HTMLMainElement>document.getElementById('main');
 
-        this.startButton = <HTMLButtonElement>document.getElementById("startButton");
-
         // Set main content maximum width depending on video size
         this.mainContent.style.maxWidth = this.video.width.toString() + 'px';
 
+        // Add actons to buttons
         document.getElementById('scrollToHome').addEventListener('mousedown', function() {
             let intro = document.getElementById('intro');
             intro.style.top = '-200%';
@@ -88,14 +97,9 @@ export class VideoPlayerComponent implements AfterViewInit {
             self.video.play();
         });
 
-      this.startButton.addEventListener('mousedown', function(){
-
-        self.router.navigate( ['/choose']);
-
-      });
-
-
-
+        document.getElementById("startButton").addEventListener('mousedown', function(){
+            self.router.navigate( ['/choose']);
+        });
 
         // Make canvas responsive (using a resize timer to avoid viewport size inconsistencies)
         this.resizeTimer = window.setTimeout(

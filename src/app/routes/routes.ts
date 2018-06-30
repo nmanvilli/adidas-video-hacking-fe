@@ -13,5 +13,5 @@ export const routes: Routes = [
     { path: 'edit', component: FrameCustomizerComponent },
     { path: 'share-from-store', component: FrameQRComponent },
     { path: 'share', component: FrameSharingComponent },
-    { path: 'about', component: AboutComponent}
+    { path: 'about', component: AboutComponent }
 ];

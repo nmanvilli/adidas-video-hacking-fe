@@ -1,3 +1,6 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
 export class FrameConverter {
 
     fps: number = 8; // Frames per second

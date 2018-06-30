@@ -1,5 +1,8 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+// Load Menu Bar
+import { MenuBarComponent } from '../menu-bar/menu-bar.component';
 
 @Component({
 	selector: 'APP-about',
@@ -8,5 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 	providers: []
 })
 export class AboutComponent{
+
+    // Add Menu Bar
+    @ViewChild(MenuBarComponent) menu: MenuBarComponent;
 
 }

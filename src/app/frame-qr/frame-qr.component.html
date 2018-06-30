@@ -1,33 +1,48 @@
+<app-menu-bar></app-menu-bar>
+
 <div class="site-inner">
     <main id="main">
 
-        <section class="content">
+        <section id="sharingContent" class="content">
 
-            <div id="sharingContent">
+                <div class="left">
+                    <!-- Source video (hidden and used to generate the playing canvas frame by frame) -->
+                    <video id="sourceVideo" width="1920" height="817" preload="auto" loop="loop" crossorigin="anonymous" autoplay="autoplay">
+                        <source src="{{baseUrl}}vid/video.mp4" type="video/mp4">
+                    </video>
 
-                <div class="canvas-container">
-                    <canvas id="showingCanvas"></canvas>
-                </div>
+                    <canvas id="playingCanvas"></canvas>
 
-                <div id="share">
-                    <div>
-
-                        <ul id="socials">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-
-                        <div class="shareText">
-                            <span>thanks!</span>
-                            <p>share your creation and be part of the adidas creators community</p>
+                    <div class="video-controls">
+                        <input type="range" id="seekBar" value="0" disabled="disabled">
+                        <div id="mark-content">
+                            <span id="mark"></span>
                         </div>
-
                     </div>
-
                 </div>
 
-            </div>
+                <div class="right">
+                    <div class="canvas-container">
+                        <canvas id="showingCanvas"></canvas>
+                    </div>
+        
+                    <div id="share">
+                        <div>
+    
+                            <ul id="socials">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+    
+                            <div class="shareText">
+                                <span>thanks!</span>
+                                <p>share your creation and be part of the adidas creators community</p>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
 
             <!-- <qr-code [value]="shareUrl" [size]="150"></qr-code> -->
 

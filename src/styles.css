@@ -1,6 +1,15 @@
 @import '~font-awesome/css/font-awesome.css';
 
 @font-face {
+    font-family: 'nexa';
+    src: url('/assets/fonts/nexa_bold-webfont.woff2') format('woff2'),
+         url('/assets/fonts/nexa_bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
     font-family: 'thirdRail';
     src: url('/assets/fonts/thirdrail-webfont.woff2') format('woff2'),
          url('/assets/fonts/thirdrail-webfont.woff') format('woff');

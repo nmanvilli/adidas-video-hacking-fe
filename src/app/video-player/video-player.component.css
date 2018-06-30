@@ -56,21 +56,30 @@
 		top: -100%;
 	}
 }
-
-#scrollToHome{
+#scrollToHome {
+	width: 64px;
+	height: 84px;
+	background-color: transparent;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+#scrollToHome > span{
 	width: 60px;
 	height: 60px;
-	background-color: transparent;
+	display: block;
 	border: 2px solid #f1f1f1;
 	border-radius: 50%;
-	position: relative;
+	position: absolute;
 	top: 20px;
+	left:0;
 	animation: scrollDownAni .9s infinite;
 	animation-delay: 2.3s;
 	cursor: pointer;
 }
 
-#scrollToHome::after{
+#scrollToHome > span::after{
 	content: "";
 	position: absolute;
 	top: 50%;
