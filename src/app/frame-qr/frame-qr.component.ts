@@ -11,6 +11,9 @@ import { MenuBarComponent } from '../menu-bar/menu-bar.component';
 import { FrameConverter } from '../services/frame-converter.service';
 import { VideoControls } from './video-controls';
 
+// Load Modals script
+import '../../assets/js/modals.js';
+
 @Component({
 	selector: 'app-frame-qr',
     templateUrl: './frame-qr.component.html',
@@ -50,6 +53,8 @@ export class FrameQRComponent implements AfterViewInit {
 	// Object representing the last modified frame
 	frame: { id: string, numericId: number, path: string, variationPath: string };
 
+	backHomeUrlParams: string;
+
     constructor(private route: ActivatedRoute, private restApiService: RestApiService) {
 
 		// Get API base URL
@@ -63,6 +68,7 @@ export class FrameQRComponent implements AfterViewInit {
 				path: params['path'],
 				variationPath: params['variationPath']
 			};
+			this.backHomeUrlParams = '?id=' + params['id'] + '&path=' + params['path'] + '&variationPath=' + params['variationPath'];
 			this.shareUrl = 'http://nmanvilli.com/';
 		});
 	}

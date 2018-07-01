@@ -2,6 +2,7 @@
 	width: 100%;
 	height: 100%;
 }
+
 #main {
 	margin: 0 auto;
 	width: 100%;
@@ -20,13 +21,14 @@
 	text-align: center;
 	vertical-align: middle;
 	box-siing: border-box;
-	width: 50%;
 }
 .left {
 	padding: 0 2.5% 0 5%;
+	width: 62%;
 }
 .right {
 	padding: 0 5% 0 2.5%;
+	width: 38%;
 }
 
 #showingCanvas {
@@ -46,21 +48,18 @@ canvas {
 #share{
 	width: 100%;
 	flex: 0 1 auto;
-	height: 450px;
-	display: table;
 	margin: 0 auto;
 	padding: 40px;
 	box-sizing: border-box;
 }
 
 #share > div{
-	display: table-cell;
-	vertical-align: top;
 	text-align: center;
 }
 
 
-#socials{
+#socials {
+	display: flex;
 	width: 302px;
 	height: 84px;
 	list-style: none;
@@ -72,6 +71,7 @@ canvas {
 
 
 #socials  li {
+	flex-basis: 33.333%;
 	width: 84px;
 	margin-right: 25px;
 	border-radius: 50%;

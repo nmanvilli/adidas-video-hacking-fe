@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,7 +9,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MenuBarComponent {
 
+    @Input() urlparams: string;
+
     constructor(private router: Router, private route: ActivatedRoute) {
+        if (this.urlparams == undefined) {
+            this.urlparams = '';
+        }
 	}
 
 }
