@@ -51,11 +51,17 @@ export class FrameQRComponent implements AfterViewInit {
 	frameConv: FrameConverter;
 
 	// Object representing the last modified frame
-	frame: { id: string, numericId: number, path: string, variationPath: string };
+	frame: {
+		id: string,
+		numericId: number,
+		path: string,
+		variationPath: string
+	};
 
+	// String of GET parameters to be applied to home links, to keep last modified frame
 	backHomeUrlParams: string;
 
-    constructor(private route: ActivatedRoute, private restApiService: RestApiService) {
+    constructor( private route: ActivatedRoute, private restApiService: RestApiService ) {
 
 		// Get API base URL
 		this.baseUrl = restApiService.getBaseUrl();
@@ -89,7 +95,8 @@ export class FrameQRComponent implements AfterViewInit {
         // Get playing canvas from DOM
         this.playVideoCanvas = <HTMLCanvasElement>document.getElementById('playingCanvas');
 
-		this.resizeCanvas();
+		// Calculate size for the Canvases
+		this.resizeCanvases();
 		this.drawVariation();
 
         // Create frameConverter object
@@ -102,16 +109,24 @@ export class FrameQRComponent implements AfterViewInit {
 
 	} // end of ngAfterViewInit()
 
-	resizeCanvas() {
-		let newCanvasWidth = this.canvas.clientWidth;
+
+
+	resizeCanvases() {
+		let leftCol = document.getElementById('leftInner');
+		let rightCol = document.getElementById('rightInner');
+
+		let newPlayVideoCanvasWidth = leftCol.clientWidth;
+		let newCanvasWidth = rightCol.clientWidth;
+
+		console.log(newPlayVideoCanvasWidth);
 
 		this.canvas.setAttribute( 'width', newCanvasWidth + 'px' );
 		this.canvas.setAttribute( 'height', (newCanvasWidth * 817 / 1920) + 'px' );
 
-		this.video.setAttribute( 'width', newCanvasWidth + 'px' );
-		this.video.setAttribute( 'height', (newCanvasWidth * 817 / 1920) + 'px' );
-		this.playVideoCanvas.setAttribute( 'width', newCanvasWidth + 'px' );
-		this.playVideoCanvas.setAttribute( 'height', (newCanvasWidth * 817 / 1920) + 'px' );
+		this.video.setAttribute( 'width', newPlayVideoCanvasWidth + 'px' );
+		this.video.setAttribute( 'height', (newPlayVideoCanvasWidth * 817 / 1920) + 'px' );
+		this.playVideoCanvas.setAttribute( 'width', newPlayVideoCanvasWidth + 'px' );
+		this.playVideoCanvas.setAttribute( 'height', (newPlayVideoCanvasWidth * 817 / 1920) + 'px' );
     }
 
 

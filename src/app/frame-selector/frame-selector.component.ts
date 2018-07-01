@@ -1,14 +1,14 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuBarComponent } from '../menu-bar/menu-bar.component';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
-import { Observable } from 'rxjs';
 
 // Load Template Models
 import { FrameThumbnail } from './frame-thumbnail';
 
+// Load Menu Bar
+import { MenuBarComponent } from '../menu-bar/menu-bar.component';
 
 @Component({
     selector: 'app-frame-selector',
@@ -16,12 +16,15 @@ import { FrameThumbnail } from './frame-thumbnail';
     styleUrls: ['./frame-selector.component.css'],
     providers: [ RestApiService ]
 })
-export class FrameSelectorComponent implements AfterViewInit {
+export class FrameSelectorComponent {
 
+    // Add Menu Bar
     @ViewChild(MenuBarComponent) menu: MenuBarComponent;
 
+    // HTML title
     title = 'Choose the frame to customize!';
 
+    // Array of random thumbnails
     frameThumbs: Array<FrameThumbnail> = [];
 
 
@@ -36,12 +39,6 @@ export class FrameSelectorComponent implements AfterViewInit {
                 }
             });
 
-
-
-
-    }
-
-    ngAfterViewInit() {
     }
 
 }

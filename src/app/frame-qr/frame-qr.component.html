@@ -6,46 +6,50 @@
         <section id="sharingContent" class="content">
 
                 <div class="left">
+                    <div id="leftInner">
 
-                    <!-- Source video (hidden and used to generate the playing canvas frame by frame) -->
-                    <video id="sourceVideo" width="1920" height="817" preload="auto" loop="loop" crossorigin="anonymous" autoplay="autoplay">
-                        <source src="{{baseUrl}}vid/video.mp4" type="video/mp4">
-                    </video>
+                        <!-- Source video (hidden and used to generate the playing canvas frame by frame) -->
+                        <video id="sourceVideo" width="1920" height="817" preload="auto" loop="loop" crossorigin="anonymous" autoplay="autoplay">
+                            <source src="{{baseUrl}}vid/video.mp4" type="video/mp4">
+                        </video>
 
-                    <canvas id="playingCanvas"></canvas>
+                        <canvas id="playingCanvas"></canvas>
 
-                    <div class="video-controls">
-                        <input type="range" id="seekBar" value="0" disabled="disabled">
-                        <div id="mark-content">
-                            <span id="mark"></span>
+                        <div class="video-controls">
+                            <input type="range" id="seekBar" value="0" disabled="disabled">
+                            <div id="mark-content">
+                                <span id="mark"></span>
+                            </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
 
                 <div class="right">
+                    <div id="rightInner">
 
-                    <div class="canvas-container">
-                        <canvas id="showingCanvas"></canvas>
-                    </div>
+                        <div class="canvas-container">
+                            <canvas id="showingCanvas"></canvas>
+                        </div>
+            
+                        <!-- <qr-code [value]="shareUrl" [size]="150"></qr-code> -->
+
+                        <div id="share">
         
-                    <!-- <qr-code [value]="shareUrl" [size]="150"></qr-code> -->
+                            <ul id="socials">
+                                <li data-target="facebookModal" data-toggle="modal"></li>
+                                <li data-target="instagramModal" data-toggle="modal"></li>
+                                <li data-target="pinterestModal" data-toggle="modal"></li>
+                            </ul>
 
-                    <div id="share">
-    
-                        <ul id="socials">
-                            <li data-target="facebookModal" data-toggle="modal"></li>
-                            <li data-target="instagramModal" data-toggle="modal"></li>
-                            <li data-target="pinterestModal" data-toggle="modal"></li>
-                        </ul>
+                            <div class="shareText">
+                                <span>thanks!</span>
+                                <p>share your creation and be part of the adidas creators community</p>
+                            </div>
 
-                        <div class="shareText">
-                            <span>thanks!</span>
-                            <p>share your creation and be part of the adidas creators community{{ frame.id }}</p>
                         </div>
 
                     </div>
-
                 </div>
 
         </section>

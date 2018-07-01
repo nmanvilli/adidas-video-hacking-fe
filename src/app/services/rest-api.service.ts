@@ -6,7 +6,7 @@ export class RestApiService  {
 
 	baseURL = 'http://localhost:3000/';
 
-	constructor(private http: HttpClient) { }
+	constructor( private http: HttpClient ) { }
 
 	// Returns an array of random frames
 	getRandomFrames(){
@@ -23,6 +23,7 @@ export class RestApiService  {
 		).toPromise();
 	}
 
+	// Return base URL for the API
 	getBaseUrl() {
 		return this.baseURL;
 	}

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'app-menu-bar',
@@ -11,7 +10,7 @@ export class MenuBarComponent {
 
     @Input() urlparams: string;
 
-    constructor(private router: Router, private route: ActivatedRoute) {
+    constructor() {
         if (this.urlparams == undefined) {
             this.urlparams = '';
         }

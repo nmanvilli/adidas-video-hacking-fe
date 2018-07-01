@@ -16,13 +16,11 @@ export class FrameConverter {
     video: HTMLVideoElement;
     canvas: HTMLCanvasElement;
     canvasCtx: CanvasRenderingContext2D;
-    framebuffer: HTMLCanvasElement;
-    framebufferCtx: CanvasRenderingContext2D;
 
     // Object representing the last modified frame
-	frame: { id: string, numericId: number, path: string, variationPath: string };
-    variationId: number;
-    variationPath: any;
+    frame: { id: string, numericId: number, path: string, variationPath: string };
+    
+    // Image object created from last modified frame
     variationImage: any;
 
     // Main function (constructor)
@@ -32,11 +30,6 @@ export class FrameConverter {
 
         this.canvas = canvas;
         this.canvasCtx = this.canvas.getContext('2d');
-
-        this.framebuffer = document.createElement('canvas');
-        this.framebuffer.width = this.video.width;
-        this.framebuffer.height = this.video.height;
-        this.framebufferCtx = this.framebuffer.getContext('2d');
 
         this.frame = frame;
 
@@ -74,7 +67,7 @@ export class FrameConverter {
     // Rendering call-back
     render() {
 
-        // If the video is not paused or ended, render  the new frame
+        // If the video is not paused or ended, render the new frame
         if ( this.video.paused || this.video.ended ) return;
         this.renderFrame();
 
@@ -95,34 +88,25 @@ export class FrameConverter {
     // Compute and display the next frame
     renderFrame() {
 
-        // Acquire a video frame from the video element
-        this.framebufferCtx.drawImage(
-            this.video,
-            0, 0,
-            this.canvas.width, this.canvas.height
-        );
-
         // Calculate current frame  number
         let currentFrameIndex = Math.floor( this.video.currentTime * this.fps );
 
-        // Apply corresponding variation overlay
+        // Apply corresponding variation
         if ( (this.frame != undefined) && (currentFrameIndex == this.frame.numericId) ) {
-            this.framebufferCtx.drawImage(
+            this.canvasCtx.drawImage(
                 this.variationImage,
                 0, 0,
                 this.canvas.width, this.canvas.height
             );
-            
         }
-
-        // Retrieve graphic data from the frame-buffer canvas
-        let data = this.framebufferCtx.getImageData(
-            0, 0,
-            this.canvas.width, this.canvas.height
-        );
-
-        // Render to canvasCtx
-        this.canvasCtx.putImageData(data, 0, 0);
+        else {
+            // Acquire a video frame from the video element
+            this.canvasCtx.drawImage(
+                this.video,
+                0, 0,
+                this.canvas.width, this.canvas.height
+            );
+        }
 
         return;
     }

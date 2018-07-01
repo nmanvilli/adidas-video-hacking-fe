@@ -26,7 +26,6 @@ export class VideoControls {
             // Calculate the slider value from the video time
             let value = 100.0 / self.video.duration * self.video.currentTime;
             let variationValue = 100.0 / self.video.duration * (0.125 * self.frameId);
-            console.log('frame '+self.frameId+', dur '+self.video.duration+', varVal '+variationValue);
 
             // Update the slider value
             self.seekBar.value = value.toString();

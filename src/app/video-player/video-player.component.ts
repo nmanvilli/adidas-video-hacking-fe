@@ -1,6 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
@@ -22,27 +21,30 @@ export class VideoPlayerComponent implements AfterViewInit {
     // Add Menu Bar
     @ViewChild(MenuBarComponent) menu: MenuBarComponent;
 
+    // HTML title
     title = 'Adidas Video Hacking';
 
-    // Base server URL
+    // Base server URL (used in template)
     baseUrl: string;
 
     // DOM elements
-    mainContent: HTMLMainElement;
     video: HTMLVideoElement;
     canvas: HTMLCanvasElement;
 
-    // Frames sequencer and array of frames
+    // Frame sequencer and array of frames
     frameConv: FrameConverter;
     
     // Object representing the last modified frame
-	frame: { id: string, numericId: number, path: string, variationPath: string };
+	frame: {
+        id: string,
+        numericId: number,
+        path: string,
+        variationPath: string
+    };
 
     // Timer used by the resize event
     resizeTimer: number;
 
-    // Observable containing the API request results
-    apiRequest: Observable<Object>;
 
     constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService ) {
 
@@ -83,12 +85,6 @@ export class VideoPlayerComponent implements AfterViewInit {
             this.frameConv = new FrameConverter( this.video, this.canvas  );
         }
 
-        // Get main content wrapper from DOM
-        this.mainContent = <HTMLMainElement>document.getElementById('main');
-
-        // Set main content maximum width depending on video size
-        this.mainContent.style.maxWidth = this.video.width.toString() + 'px';
-
         // Add actons to buttons
         document.getElementById('scrollToHome').addEventListener('mousedown', function() {
             let intro = document.getElementById('intro');
@@ -118,22 +114,26 @@ export class VideoPlayerComponent implements AfterViewInit {
 
 
     resizeCanvas() {
-        // Resize canvas
-        let currentWidth = this.mainContent.clientWidth;
-        let currentHeight = this.mainContent.clientHeight;
+        // Get window size
+        let currentWidth = window.innerWidth;
+        let currentHeight = window.innerHeight;
 
+        // Get ratios
         let currentRatio = currentWidth / currentHeight;
         let videoRatio = this.video.width / this.video.height;
 
+        // Calculate new dimensions for the video
         let newVideoWidth;
         let newVideoHeight;
         if (videoRatio > currentRatio) {
+            // Video is "more landscape" than window
             newVideoHeight = currentHeight;
             newVideoWidth = newVideoHeight * videoRatio;
             this.canvas.style.top = '0';
             this.canvas.style.left = (-(newVideoWidth - currentWidth) / 2).toString() + 'px';
         }
         else {
+            // Video is "less landscape" than window
             newVideoWidth = currentWidth;
             newVideoHeight = newVideoWidth / videoRatio;
             this.canvas.style.top = (-(newVideoHeight - currentHeight) / 2).toString() + 'px';

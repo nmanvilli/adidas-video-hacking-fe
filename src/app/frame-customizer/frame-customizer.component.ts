@@ -18,13 +18,11 @@ import { FrameCustomizerControls } from './frame-customizer-controls';
 })
 export class FrameCustomizerComponent implements AfterViewInit {
 
+	// HTML title
 	title = 'Customize the frame!';
 
 	// Object representing the current frame
 	frame: { id :string, path: string };
-
-	// Main content wrapper
-	mainContent: HTMLElement;
 
 	// Fabric Canvas for drawing
 	drawingCanvas: fabric.Canvas;
@@ -33,6 +31,7 @@ export class FrameCustomizerComponent implements AfterViewInit {
 	canvasContainer: HTMLElement;
 	upperCanvas: HTMLCanvasElement;
 
+	// Reset and Done buttons
 	resetButton: HTMLButtonElement;
 	doneButton: HTMLButtonElement;
 
@@ -58,26 +57,25 @@ export class FrameCustomizerComponent implements AfterViewInit {
 		// This variable used to pass ourself to event call-backs
         let self:FrameCustomizerComponent = this;
 
-		// Get main content wrapper from DOM
-		this.mainContent = document.getElementById('main');
+		// Calculate size for the Drawing Canvas
+		this.resizeCanvas();
 
 		// Create Fabric Drawing Canvas from DOM
-		this.resizeCanvas();
 		this.drawingCanvas = new fabric.Canvas('drawingCanvas');
 		(<HTMLCanvasElement>document.getElementsByClassName('canvas-container').item(0)).style.margin = '0 auto';
 
-		// Get Frame Brush Addon canvas
-		this.upperCanvas = <HTMLCanvasElement>document.getElementsByClassName('upper-canvas').item(0);
+		// Load frame image as Canvas background
+		this.drawBackground();
 
 		// Get "Done" button from DOM
 		this.resetButton = <HTMLButtonElement>document.getElementById('resetBtn');
 		this.doneButton = <HTMLButtonElement>document.getElementById('doneBtn');
 
-		// Load frame image as Canvas background
-		this.drawBackground();
-
 		// Create drawing controls
 		this.controls = new FrameCustomizerControls(this.drawingCanvas);
+
+		// Get Frame Brush Addon canvas
+		this.upperCanvas = <HTMLCanvasElement>document.getElementsByClassName('upper-canvas').item(0);
 
 		// Prepare canvas for drawing
 		this.drawingCanvas.isDrawingMode = true;
@@ -114,7 +112,6 @@ export class FrameCustomizerComponent implements AfterViewInit {
 			 *	The following two lines of code are needed because the
 			 *	Fabric Brush addon works on an overlaying canvas.
 			 */
-
 			let upperCtx = self.upperCanvas.getContext('2d');
 			upperCtx.clearRect(0, 0, self.upperCanvas.width, self.upperCanvas.height);
 
@@ -167,10 +164,6 @@ export class FrameCustomizerComponent implements AfterViewInit {
 		// This variable used to pass ourself to event call-backs
         let self:FrameCustomizerComponent = this;
 
-		// Get canvas size
-		let canvasWidth = self.drawingCanvas.width;
-		let canvasHeight = self.drawingCanvas.height;
-
 		// Temporary Canvas that will hold the reassembled variation
 		let newFrame = document.createElement('canvas');
 		newFrame.width = 1920;
@@ -213,26 +206,29 @@ export class FrameCustomizerComponent implements AfterViewInit {
 	} // end of mergeUpperCanvasThenSend()
 
 	resizeCanvas() {
+		let main = <HTMLCanvasElement>document.getElementById('main');
 		let canvas = <HTMLCanvasElement>document.getElementById('drawingCanvas');
 
-        // Resize canvas
-        let currentWidth = this.mainContent.clientWidth;
-		let currentHeight = this.mainContent.clientHeight;
+        // Get window size
+        let currentWidth = main.clientWidth;
+		let currentHeight = main.clientHeight;
 
+		// Get ratios
         let currentRatio = currentWidth / currentHeight;
         let canvasRatio = 1920 / 817;
 
         let newCanvasWidth;
         let newCanvasHeight;
         if (canvasRatio > currentRatio) {
+			// Canvas is "more landscape" than available space
 			newCanvasWidth = currentWidth;
             newCanvasHeight = newCanvasWidth / canvasRatio;
         }
         else {
+			// Canvas is "less landscape" than available space
             newCanvasHeight = currentHeight;
             newCanvasWidth = newCanvasHeight * canvasRatio;
 		}
-
 		canvas.setAttribute( 'width', newCanvasWidth.toString()+'px' );
 		canvas.setAttribute( 'height', newCanvasHeight.toString()+'px' );
     }

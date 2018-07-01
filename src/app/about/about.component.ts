@@ -1,5 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
 
 // Load Menu Bar
 import { MenuBarComponent } from '../menu-bar/menu-bar.component';
