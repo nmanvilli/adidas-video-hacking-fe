@@ -51,7 +51,7 @@
 	width: 100%;
 	flex: 0 1 auto;
 	margin: 0 auto;
-	padding: 40px;
+	padding: 40px 40px 0 40px;
 	box-sizing: border-box;
 }
 
@@ -63,23 +63,25 @@
 #socials {
 	display: flex;
 	width: 302px;
-	height: 84px;
+	height: 60px;
 	list-style: none;
 	padding: 0;
 	margin: auto;
 	display:flex;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
 
 #socials  li {
 	flex-basis: 33.333%;
-	width: 84px;
+	width: 33.333%;
 	margin-right: 25px;
 	border-radius: 50%;
-	background-position: center;
-	background-size: cover;
-	cursor: pointer;
+	background-size: 60px auto;
+	background-image: url("/assets/img/icons/facebook.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: url('/assets/img/cursor.png'), pointer;
 }
 
 #socials li:nth-child(1){
@@ -99,6 +101,9 @@
 .shareText{
 	font-family: nexa;
 	font-weight: 700;
+}
+.shareText p {
+	margin-top: 0;
 }
 
 .shareText span {
@@ -132,7 +137,7 @@
 #seekBar::-webkit-slider-runnable-track {
 	width: 100%;
 	height: 8px;
-	cursor: pointer;
+	cursor: url('/assets/img/cursor.png'), pointer;
 	animate: 0.2s;
 	box-shadow: none;
 	background: #333;
@@ -142,7 +147,7 @@
 #seekBar::-moz-range-track {
 	width: 100%;
 	height: 8px;
-	cursor: pointer;
+	cursor: url('/assets/img/cursor.png'), pointer;
 	animate: 0.2s;
 	box-shadow: none;
 	background: #333;
@@ -152,7 +157,7 @@
 #seekBar::-ms-track {
 	width: 100%;
 	height: 8px;
-	cursor: pointer;
+	cursor: url('/assets/img/cursor.png'), pointer;
 	animate: 0.2s;
 	background: transparent;
 	border: none;
@@ -179,7 +184,7 @@
 	width: 16px;
 	border-radius: 3px;
 	background: #fff;
-	cursor: pointer;
+	cursor: url('/assets/img/cursor.png'), pointer;
 	-webkit-appearance: none;
 	margin-top: -4px;
 }
@@ -190,7 +195,7 @@
 	width: 16px;
 	border-radius: 3px;
 	background: #fff;
-	cursor: pointer;
+	cursor: url('/assets/img/cursor.png'), pointer;
 }
 #seekBar::-ms-thumb {
 	box-shadow: none;
@@ -199,14 +204,25 @@
 	width: 16px;
 	border-radius: 3px;
 	background: #fff;
-	cursor: pointer;
+	cursor: url('/assets/img/cursor.png'), pointer;
+}
+
+#mark span {
+	position: absolute;
+	top: 40px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 10em;
+	text-align:center;
+	font-family: nexa;
+    font-weight: 700;
 }
 
 #mark-content{
 	position: relative;
 	width: 100%;
 	height: 40px;
-	margin-top: 5px;
+	margin-top: 15px;
 }
 
 #mark-content > span {

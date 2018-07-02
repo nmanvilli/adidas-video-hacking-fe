@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit, Compiler } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 // Load Server API handler
@@ -16,7 +16,7 @@ import { MenuBarComponent } from '../menu-bar/menu-bar.component';
     styleUrls: ['./video-player.component.css'],
     providers: [ RestApiService ]
 })
-export class VideoPlayerComponent implements AfterViewInit {
+export class VideoPlayerComponent implements AfterViewInit, OnInit {
 
     // Add Menu Bar
     @ViewChild(MenuBarComponent) menu: MenuBarComponent;
@@ -46,7 +46,7 @@ export class VideoPlayerComponent implements AfterViewInit {
     resizeTimer: number;
 
 
-    constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService ) {
+    constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService, private runtimeCompiler: Compiler ) {
 
         // Get API base URL
         this.baseUrl = restApiService.getBaseUrl();
@@ -63,6 +63,11 @@ export class VideoPlayerComponent implements AfterViewInit {
             }
         });
 
+    }
+
+    
+    ngOnInit() {
+        this.runtimeCompiler.clearCache();
     }
 
 

@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit, Compiler  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // Load Server API handler
@@ -61,7 +61,7 @@ export class FrameQRComponent implements AfterViewInit {
 	// String of GET parameters to be applied to home links, to keep last modified frame
 	backHomeUrlParams: string;
 
-    constructor( private route: ActivatedRoute, private restApiService: RestApiService ) {
+    constructor( private route: ActivatedRoute, private restApiService: RestApiService, private runtimeCompiler: Compiler ) {
 
 		// Get API base URL
 		this.baseUrl = restApiService.getBaseUrl();
@@ -78,6 +78,11 @@ export class FrameQRComponent implements AfterViewInit {
 			this.shareUrl = 'http://nmanvilli.com/';
 		});
 	}
+
+
+	ngOnInit() {
+        this.runtimeCompiler.clearCache();
+    }
 
 
     ngAfterViewInit() {

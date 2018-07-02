@@ -1,38 +1,78 @@
-<app-menu-bar></app-menu-bar>
+<app-menu-bar [urlparams]="backHomeUrlParams"></app-menu-bar>
 
 <div class="site-inner">
     <main id="main">
 
-        <section class="content">
+        <section id="sharingContent" class="content">
 
-            <div id="sharingContent">
+                <div class="left">
+                    <div id="leftInner">
 
-                <div class="canvas-container">
-                    <canvas id="showingCanvas"></canvas>
-                </div>
+                        <!-- Source video (hidden and used to generate the playing canvas frame by frame) -->
+                        <video id="sourceVideo" width="1920" height="817" preload="auto" loop="loop" crossorigin="anonymous" autoplay="autoplay">
+                            <source src="{{baseUrl}}vid/video.mp4" type="video/mp4">
+                        </video>
 
-                <div id="share">
-                    <div>
+                        <canvas id="playingCanvas"></canvas>
 
-                        <ul id="socials">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-
-                        <div class="shareText">
-                            <span>thanks!</span>
-                            <p>share your creation and be part of the adidas creators community</p>
+                        <div class="video-controls">
+                            <input type="range" id="seekBar" value="0" disabled="disabled">
+                            <div id="mark-content">
+                                <span id="mark"><span>You Are Here!</span></span>
+                            </div>
                         </div>
 
                     </div>
-
                 </div>
 
-            </div>
+                <div class="right">
+                    <div id="rightInner">
 
-            <!-- <qr-code [value]="shareUrl" [size]="150"></qr-code> -->
+                        <div class="canvas-container">
+                            <canvas id="showingCanvas"></canvas>
+                        </div>
+            
+                        <!-- <qr-code [value]="shareUrl" [size]="150"></qr-code> -->
+
+                        <div id="share">
+        
+                            <ul id="socials">
+                                <li data-target="facebookModal" data-toggle="modal"></li>
+                                <li data-target="instagramModal" data-toggle="modal"></li>
+                                <li data-target="pinterestModal" data-toggle="modal"></li>
+                            </ul>
+
+                            <div class="shareText">
+                                <span>thanks!</span>
+                                <p>share your creation and be part of the adidas creators community</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
 
         </section>
     </main>
+</div>
+
+<div id="facebookModal" class="modal">
+    <div class="modal-window">
+        <span class="close" data-dismiss="modal">&times;</span>
+        <img src="/assets/img/facebook-post.png" alt="">
+    </div>
+</div>
+
+<div id="instagramModal" class="modal">
+    <div class="modal-window">
+        <span class="close" data-dismiss="modal">&times;</span>
+        <img src="/assets/img/instagram-post.jpg" alt="">
+    </div>
+</div>
+
+<div id="pinterestModal" class="modal">
+    <div class="modal-window">
+        <span class="close" data-dismiss="modal">&times;</span>
+        <img src="/assets/img/pinterest-post.jpg" alt="">
+    </div>
 </div>
