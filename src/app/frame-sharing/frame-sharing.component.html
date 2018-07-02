@@ -1,4 +1,4 @@
-<app-menu-bar [urlparams]="backHomeUrlParams"></app-menu-bar>
+<app-menu-bar *ngIf="! isInStore" [urlparams]="backHomeUrlParams"></app-menu-bar>
 
 <div class="site-inner">
     <main id="main">
@@ -31,8 +31,6 @@
                         <div class="canvas-container">
                             <canvas id="showingCanvas"></canvas>
                         </div>
-            
-                        <!-- <qr-code [value]="shareUrl" [size]="150"></qr-code> -->
 
                         <div id="share">
         

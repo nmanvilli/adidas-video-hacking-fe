@@ -1,6 +1,8 @@
 import { Component, ViewChild, AfterViewInit, OnInit, Compiler  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { GlobalsService } from '../services/globals.service';
+
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
 
@@ -18,9 +20,11 @@ import '../../assets/js/modals.js';
 	selector: 'app-frame-sharing',
     templateUrl: './frame-sharing.component.html',
     styleUrls: ['./frame-sharing.component.css'],
-	providers: [ RestApiService ]
+	providers: [ RestApiService, GlobalsService ]
 })
-export class FrameSharingComponent implements AfterViewInit {
+export class FrameSharingComponent implements AfterViewInit, OnInit {
+
+	isInStore: boolean;
 
 	// HTML title
 	title = 'Share the frame!';
@@ -30,9 +34,6 @@ export class FrameSharingComponent implements AfterViewInit {
 
 	// Base server URL
 	baseUrl: string;
-
-	// URL for the QR code
-	shareUrl: string;
 
 	// Get canvas from DOM
 	canvas: HTMLCanvasElement;
@@ -61,7 +62,9 @@ export class FrameSharingComponent implements AfterViewInit {
 	// String of GET parameters to be applied to home links, to keep last modified frame
 	backHomeUrlParams: string;
 
-    constructor( private route: ActivatedRoute, private restApiService: RestApiService, private runtimeCompiler: Compiler ) {
+    constructor( private route: ActivatedRoute, private restApiService: RestApiService, private runtimeCompiler: Compiler, private globalsService: GlobalsService ) {
+
+		this.isInStore = globalsService.INSTORE;
 
 		// Get API base URL
 		this.baseUrl = restApiService.getBaseUrl();
@@ -75,7 +78,6 @@ export class FrameSharingComponent implements AfterViewInit {
 				variationPath: params['variationPath']
 			};
 			this.backHomeUrlParams = '?id=' + params['id'] + '&path=' + params['path'] + '&variationPath=' + params['variationPath'];
-			this.shareUrl = 'http://nmanvilli.com/';
 		});
 	}
 

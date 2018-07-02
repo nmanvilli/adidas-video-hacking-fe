@@ -1,6 +1,8 @@
 import { Component, ViewChild, AfterViewInit, OnInit, Compiler } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { GlobalsService } from '../services/globals.service';
+
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
 
@@ -14,9 +16,11 @@ import { MenuBarComponent } from '../menu-bar/menu-bar.component';
     selector: 'app-video-player',
     templateUrl: './video-player.component.html',
     styleUrls: ['./video-player.component.css'],
-    providers: [ RestApiService ]
+    providers: [ RestApiService, GlobalsService ]
 })
 export class VideoPlayerComponent implements AfterViewInit, OnInit {
+
+    isInStore: boolean;
 
     // Add Menu Bar
     @ViewChild(MenuBarComponent) menu: MenuBarComponent;
@@ -46,7 +50,9 @@ export class VideoPlayerComponent implements AfterViewInit, OnInit {
     resizeTimer: number;
 
 
-    constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService, private runtimeCompiler: Compiler ) {
+    constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService, private runtimeCompiler: Compiler, private globalsService: GlobalsService ) {
+
+        this.isInStore = globalsService.INSTORE;
 
         // Get API base URL
         this.baseUrl = restApiService.getBaseUrl();

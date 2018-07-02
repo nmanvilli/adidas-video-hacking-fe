@@ -1,4 +1,4 @@
-<app-menu-bar [urlparams]="backHomeUrlParams"></app-menu-bar>
+<app-menu-bar *ngIf="! isInStore" [urlparams]="backHomeUrlParams"></app-menu-bar>
 
 <div class="site-inner">
     <main id="main">
@@ -31,16 +31,10 @@
                         <div class="canvas-container">
                             <canvas id="showingCanvas"></canvas>
                         </div>
-            
-                        <!-- <qr-code [value]="shareUrl" [size]="150"></qr-code> -->
 
                         <div id="share">
         
-                            <ul id="socials">
-                                <li data-target="facebookModal" data-toggle="modal"></li>
-                                <li data-target="instagramModal" data-toggle="modal"></li>
-                                <li data-target="pinterestModal" data-toggle="modal"></li>
-                            </ul>
+                            <qr-code [value]="shareUrl" [size]="80"></qr-code>
 
                             <div class="shareText">
                                 <span>thanks!</span>
@@ -54,25 +48,4 @@
 
         </section>
     </main>
-</div>
-
-<div id="facebookModal" class="modal">
-    <div class="modal-window">
-        <span class="close" data-dismiss="modal">&times;</span>
-        <img src="/assets/img/facebook-post.png" alt="">
-    </div>
-</div>
-
-<div id="instagramModal" class="modal">
-    <div class="modal-window">
-        <span class="close" data-dismiss="modal">&times;</span>
-        <img src="/assets/img/instagram-post.jpg" alt="">
-    </div>
-</div>
-
-<div id="pinterestModal" class="modal">
-    <div class="modal-window">
-        <span class="close" data-dismiss="modal">&times;</span>
-        <img src="/assets/img/pinterest-post.jpg" alt="">
-    </div>
 </div>

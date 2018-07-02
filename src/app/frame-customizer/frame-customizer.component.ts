@@ -1,6 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { GlobalsService } from '../services/globals.service';
+
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
 
@@ -14,9 +16,11 @@ import { FrameCustomizerControls } from './frame-customizer-controls';
 	selector: 'app-frame-customizer',
     templateUrl: './frame-customizer.component.html',
     styleUrls: ['./frame-customizer.component.css'],
-	providers: [ RestApiService ]
+	providers: [ RestApiService, GlobalsService ]
 })
 export class FrameCustomizerComponent implements AfterViewInit {
+
+	isInStore: boolean;
 
 	// HTML title
 	title = 'Customize the frame!';
@@ -42,7 +46,9 @@ export class FrameCustomizerComponent implements AfterViewInit {
     resizeTimer: number;
 
 
-    constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService) {
+    constructor(private router: Router, private route: ActivatedRoute, private restApiService: RestApiService, private globalsService: GlobalsService) {
+
+		this.isInStore = globalsService.INSTORE;
 
 		// Get URL parameters (info about the current frame)
 		this.route.queryParams.subscribe(params => {
@@ -147,10 +153,19 @@ export class FrameCustomizerComponent implements AfterViewInit {
 			data => {
 				let fileName = data;
 
-				// Redirect to Frame Sharing afterwards
-				this.router.navigate( ['/share-from-store'],{queryParams:
-					{id: this.frame.id, path: this.frame.path, variationPath: fileName}
-				});
+				if (this.isInStore) {
+					// Redirect to Frame Sharing afterwards
+					this.router.navigate( ['/share-from-store'],{queryParams:
+						{id: this.frame.id, path: this.frame.path, variationPath: fileName}
+					});
+				}
+				else {
+					// Redirect to Frame Sharing afterwards
+					this.router.navigate( ['/share'],{queryParams:
+						{id: this.frame.id, path: this.frame.path, variationPath: fileName}
+					});
+				}
+				
 
 			}
 		);
