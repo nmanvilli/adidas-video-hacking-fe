@@ -26,7 +26,8 @@
 
             <canvas id="playingCanvas"></canvas>
 
-            <button id="startButton" class="animated fadeInUp">Spray Here to Create</button>
+            <button *ngIf="! isInStore" id="startButton" class="animated fadeInUp">Click Here to Create</button>
+            <button *ngIf="isInStore" id="startButton" class="animated fadeInUp">Spray Here to Create</button>
 
         </section>
     </main>
