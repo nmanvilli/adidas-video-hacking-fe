@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { GlobalsService } from '../services/globals.service';
+
 // Load Server API handler
 import { RestApiService } from '../services/rest-api.service';
 
@@ -14,9 +16,11 @@ import { MenuBarComponent } from '../menu-bar/menu-bar.component';
     selector: 'app-frame-selector',
     templateUrl: './frame-selector.component.html',
     styleUrls: ['./frame-selector.component.css'],
-    providers: [ RestApiService ]
+    providers: [ RestApiService, GlobalsService ]
 })
 export class FrameSelectorComponent {
+
+    isInStore: boolean;
 
     // Add Menu Bar
     @ViewChild(MenuBarComponent) menu: MenuBarComponent;
@@ -28,7 +32,9 @@ export class FrameSelectorComponent {
     frameThumbs: Array<FrameThumbnail> = [];
 
 
-    constructor(private router: Router, private restApiService: RestApiService) {
+    constructor(private router: Router, private restApiService: RestApiService, private globalsService: GlobalsService ) {
+
+        this.isInStore = globalsService.INSTORE;
 
         // Get random frames from the server
         restApiService.getRandomFrames()
